@@ -8,10 +8,9 @@ import com.payward.mobile.dto.Request
 
 class FirebaseService {
     var requests: MutableLiveData<ArrayList<Request>> = MutableLiveData<ArrayList<Request>>()
-    private lateinit var firestore : FirebaseFirestore
+    private var firestore : FirebaseFirestore = FirebaseFirestore.getInstance()
 
     init {
-        firestore = FirebaseFirestore.getInstance()
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
         listenForRequests()
     }

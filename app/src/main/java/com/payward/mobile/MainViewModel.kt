@@ -9,13 +9,9 @@ import com.payward.mobile.service.RequestService
 class MainViewModel : ViewModel() {
     var requests: MutableLiveData<ArrayList<Request>> = MutableLiveData<ArrayList<Request>>()
     var requestService: RequestService = RequestService()
-    var firebaseService: FirebaseService = FirebaseService()
 
     fun fetchRequests(requestId: String) {
         requests = requestService.fetchRequests(requestId)
     }
 
-    fun save(request: Request) {
-        firebaseService.save(request)
-    }
 }
