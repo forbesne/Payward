@@ -15,6 +15,7 @@ import com.payward.mobile.ui.theme.PaywardTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.setContentView(R.layout.activity_main)
         setContent {
             PaywardTheme {
                 // A surface container using the 'background' color from the theme
