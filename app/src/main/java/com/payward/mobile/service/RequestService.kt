@@ -5,7 +5,7 @@ import com.payward.mobile.dto.Request
 
 class RequestService {
 
-    fun fetchRequests(requestId: Int) : MutableLiveData<ArrayList<Request>> {
+    fun fetchRequests(requestId: String) : MutableLiveData<ArrayList<Request>> {
         return MutableLiveData<ArrayList<Request>>()
     }
 
