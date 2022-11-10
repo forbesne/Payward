@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "855409753123",
+    "project_id": "paywarduc",
+    "storage_bucket": "paywarduc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:855409753123:android:722d338b04e78ffc58c596",
+        "android_client_info": {
+          "package_name": "com.payward.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "855409753123-7ctp2497am4cj25a1mqa29rbcc4j3gta.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZUnmAVtL3qso-Pku2Ut8zwuUt1XloqtE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "855409753123-7ctp2497am4cj25a1mqa29rbcc4j3gta.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
