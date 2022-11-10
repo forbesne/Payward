@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pastel_green">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dp"
+        android:background="@color/pastel_green">
+
+        <SearchView
+            android:id="@+id/simpleSearchView"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/white"/>
+
+        <Button
+            android:id="@+id/dms"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/dms"
+            android:contentDescription="@string/app_name"
+            tools:ignore="DuplicateSpeakableTextCheck" />
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="115dp"
+        android:layout_marginStart="17dp"
+        app:cardCornerRadius="30dp">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/charityName1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/textview"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:background="@color/white"
+            android:layout_marginStart="10dp"
+            android:padding="15dp"
+            tools:text="United Way Worldwide" />
+
+        <Button
+            android:id="@+id/charity1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:background="@color/pastel_green"
+            android:contentDescription="@string/app_name"
+            tools:text="DONATE!"/>
+
+    </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="240dp"
+        android:layout_marginStart="17dp"
+        app:cardCornerRadius="30dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/charityName2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/textview"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:background="@color/white"
+                android:layout_marginStart="10dp"
+                android:padding="15dp"
+                tools:text="Feeding America" />
+
+            <Button
+                android:id="@+id/charity2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="84dp"
+                android:background="@color/pastel_green"
+                android:contentDescription="@string/app_name"
+                tools:text="DONATE!"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="365dp"
+        android:layout_marginStart="17dp"
+        app:cardCornerRadius="30dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/charityName3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/textview"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:background="@color/white"
+                android:layout_marginStart="10dp"
+                android:padding="15dp"
+                tools:text="Salvation Army" />
+
+            <Button
+                android:id="@+id/charity3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="93dp"
+                android:background="@color/pastel_green"
+                android:contentDescription="@string/app_name"
+                tools:text="DONATE!"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="490dp"
+        android:layout_marginStart="17dp"
+        app:cardCornerRadius="30dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/charityName4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/textview"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:background="@color/white"
+                android:layout_marginStart="10dp"
+                android:padding="15dp"
+                tools:text="Catholic Charities USA" />
+
+            <Button
+                android:id="@+id/charity4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:background="@color/pastel_green"
+                android:contentDescription="@string/app_name"
+                tools:text="DONATE!"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="650dp"
+        android:background="@color/white">
+
+        <Button
+            android:id="@+id/home"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/home"
+            android:contentDescription="@string/app_name"
+            style="?android:attr/buttonBarButtonStyle" />
+        <!-- android:textAppearance="" -->
+
+        <Button
+            android:id="@+id/helpRequest"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/help"
+            android:contentDescription="@string/app_name"
+            style="?android:attr/buttonBarButtonStyle" />
+
+        <Button
+            android:id="@+id/charity"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/charity"
+            android:contentDescription="@string/app_name"
+            style="?android:attr/buttonBarButtonStyle" />
+
+        <Button
+            android:id="@+id/account"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/account"
+            android:contentDescription="@string/app_name"
+            style="?android:attr/buttonBarButtonStyle" />
+
+    </LinearLayout>
+
+</RelativeLayout>
