@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/pastel_green">
+    android:background="@color/pastel_green"
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -44,7 +45,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="360dp"
             android:layout_height="530dp"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="24dp"
             app:cardCornerRadius="30dp">
 
             <androidx.recyclerview.widget.RecyclerView
@@ -66,7 +67,7 @@
         android:background="@color/white">
 
         <Button
-            android:id="@+id/home"
+            android:id="@+id/homeBtn"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="42dp"
@@ -77,7 +78,7 @@
             <!-- android:textAppearance="" -->
 
         <Button
-            android:id="@+id/helpRequest"
+            android:id="@+id/helpRequestBtn"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="42dp"
@@ -87,7 +88,7 @@
             style="?android:attr/buttonBarButtonStyle" />
 
         <Button
-            android:id="@+id/charity"
+            android:id="@+id/charityBtn"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="42dp"
@@ -97,7 +98,7 @@
             style="?android:attr/buttonBarButtonStyle" />
 
         <Button
-            android:id="@+id/account"
+            android:id="@+id/accountBtn"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="42dp"
