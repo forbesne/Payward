@@ -65,7 +65,7 @@ class RequestTests {
 
     private fun thenResultContainsCincinnati() {
         var qtyFound = 0
-        mvm.requests.observeForever {
+        mvm.testRequests.observeForever {
             // /here is where we do the observing
             assertNotNull(it)
             assertTrue(it.size > 0)
@@ -84,7 +84,7 @@ class RequestTests {
 
     private fun thenResultContainsCar() {
         var qtyFound = 0
-        mvm.requests.observeForever {
+        mvm.testRequests.observeForever {
             // /here is where we do the observing
             assertNotNull(it)
             assertTrue(it.size > 0)
