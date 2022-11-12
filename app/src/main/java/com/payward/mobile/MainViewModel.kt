@@ -7,12 +7,12 @@ import com.payward.mobile.service.FirebaseService
 import com.payward.mobile.service.RequestService
 
 class MainViewModel : ViewModel() {
-    var _requests: MutableLiveData<ArrayList<Request>> = MutableLiveData<ArrayList<Request>>()
+    var testRequests: MutableLiveData<ArrayList<Request>> = MutableLiveData<ArrayList<Request>>()
     var requestService: RequestService = RequestService()
     var firebaseService: FirebaseService = FirebaseService()
 
     fun fetchRequests(requestId: String) {
-        _requests = requestService.fetchRequests(requestId)
+        testRequests = requestService.fetchRequests(requestId)
     }
 
     fun initializeFirebase(){
