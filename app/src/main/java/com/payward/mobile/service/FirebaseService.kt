@@ -3,19 +3,17 @@ package com.payward.mobile.service
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.payward.mobile.dto.Request
 
 class FirebaseService {
-    var requests: MutableLiveData<ArrayList<Request>> = MutableLiveData<ArrayList<Request>>()
-    private var firestore : FirebaseFirestore = FirebaseFirestore.getInstance()
+    var _requests: MutableLiveData<ArrayList<Request>> = MutableLiveData<ArrayList<Request>>()
 
-    init {
-        firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
+    fun initialize() {
         listenForRequests()
     }
 
     private fun listenForRequests() {
+        val firestore = FirebaseFirestore.getInstance()
         firestore.collection("requests").addSnapshotListener {
                 snapshot, e ->
             if (e != null) {
@@ -31,12 +29,13 @@ class FirebaseService {
                         allRequests.add(it)
                     }
                 }
-                requests.value = allRequests
+                _requests.value = allRequests
             }
         }
     }
 
     fun save(request: Request) {
+        val firestore = FirebaseFirestore.getInstance()
         val document = if (request.requestId == null || request.requestId.isEmpty()) {
             //add
             firestore.collection("requests").document()
@@ -49,4 +48,9 @@ class FirebaseService {
         handle.addOnSuccessListener { Log.d("Firebase", "Document Saved") }
         handle.addOnFailureListener { Log.e("Firebase", "Save failed $it ")}
     }
+
+    internal var requests:MutableLiveData<ArrayList<Request>>
+        get() { return _requests}
+        set(value) {_requests = value}
+
 }
