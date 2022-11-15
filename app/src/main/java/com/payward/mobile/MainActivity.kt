@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,10 +18,16 @@ import androidx.databinding.DataBindingUtil
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.payward.mobile.ui.theme.PaywardTheme
+import androidx.lifecycle.ViewModelProvider
+
 
 class MainActivity : ComponentActivity() {
+
+    private lateinit var viewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             PaywardTheme {
                 // A surface container using the 'background' color from the theme
@@ -109,5 +116,11 @@ class MainActivity : ComponentActivity() {
         PaywardTheme {
             Greeting("Android")
         }
+
+        this.setContentView(R.layout.activity_main)
+
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel.initializeFirebase()
+
     }
 }
