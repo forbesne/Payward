@@ -4,9 +4,12 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import com.payward.mobile.dto.Request
+import com.payward.mobile.dto.Response
 
 class FirebaseService {
     var _requests: MutableLiveData<ArrayList<Request>> = MutableLiveData<ArrayList<Request>>()
+    var _request = Request()
+    private  var _responses = MutableLiveData<List<Response>>()
 
     fun initialize() {
         listenForRequests()
@@ -49,8 +52,24 @@ class FirebaseService {
         handle.addOnFailureListener { Log.e("Firebase", "Save failed $it ")}
     }
 
+    internal fun save(response: Response) {
+        val firestore = FirebaseFirestore.getInstance()
+        val collection = firestore.collection("requests").document(request.requestId).collection("responses")
+        val task = collection.add(response)
+        task.addOnSuccessListener {
+            response.responseId = it.id
+        }
+        task.addOnFailureListener {
+            Log.d("Firebase", "Save Failed")
+        }
+
+    }
+
     internal var requests:MutableLiveData<ArrayList<Request>>
         get() { return _requests}
         set(value) {_requests = value}
 
+    internal var request:Request
+        get() { return _request}
+        set(value) {_request = value}
 }
