@@ -49,6 +49,7 @@
             app:cardCornerRadius="30dp">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRequests"
                 android:layout_width="330dp"
                 android:layout_height="508dp"
                 android:layout_marginStart="15dp"
