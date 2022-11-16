@@ -84,7 +84,7 @@
             android:layout_height="48dp"
             android:layout_marginStart="42dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/help"
+            android:text="HR"
             android:contentDescription="@string/app_name"
             style="?android:attr/buttonBarButtonStyle" />
 
