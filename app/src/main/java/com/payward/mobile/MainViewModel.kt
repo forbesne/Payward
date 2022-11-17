@@ -28,6 +28,10 @@ class MainViewModel : ViewModel() {
         firebaseService.save(response)
     }
 
+    fun respond(request: Request) {
+        firebaseService.respond(request)
+    }
+
     internal var requests:MutableLiveData<ArrayList<Request>>
         get() { return firebaseService.requests}
         set(value) {firebaseService.requests = value}
