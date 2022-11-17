@@ -1,15 +1,15 @@
 package com.payward.mobile
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.ComponentActivity
+import androidx.fragment.app.Fragment
 import com.payward.mobile.dto.Request
 
-class HelpRequestActivity : ComponentActivity() {
+class HelpRequestFragment :Fragment(R.layout.help_request_fragment) {
 
-    private lateinit var viewModel: MainViewModel
+    /*private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,10 +17,10 @@ class HelpRequestActivity : ComponentActivity() {
 
         val submitButton = findViewById<Button>(R.id.submit_button)
         submitButton.setOnClickListener {
-            val request = Request()
-            request.userId = findViewById<EditText>(R.id.user_name).toString()
-            request.text = findViewById<EditText>(R.id.description).toString()
+        val request = Request()
+        request.userId = findViewById<EditText>(R.id.user_name).toString()
+                request.text = findViewById<EditText>(R.id.description).toString()
             viewModel.save(request)
         }
-    }
+    }*/
 }

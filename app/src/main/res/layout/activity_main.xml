@@ -8,106 +8,53 @@
     android:background="@color/pastel_green"
     tools:context=".MainActivity">
 
-    <LinearLayout
+
+    <androidx.fragment.app.FragmentContainerView
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="0dp"
-        android:background="@color/pastel_green">
+        android:id="@+id/fragmentContainer"/>
 
-    <SearchView
-        android:id="@+id/simpleSearchView"
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/white"/>
+    <Button
+        android:id="@+id/homeBtn1"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="16dp"
+        android:padding="10dp"
+        android:background="@drawable/home"
+        android:contentDescription="@string/app_name"
+        style="?android:attr/buttonBarButtonStyle" />
+    <!-- android:textAppearance="" -->
 
-        <Button
-            android:id="@+id/dms"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/dms"
-            android:contentDescription="@string/app_name"
-            tools:ignore="DuplicateSpeakableTextCheck" />
+    <Button
+        android:id="@+id/helpRequestBtn1"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="16dp"
+        android:text="HR"
+        android:contentDescription="@string/app_name"
+        style="?android:attr/buttonBarButtonStyle" />
 
-    </LinearLayout>
+    <Button
+        android:id="@+id/charityBtn1"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="155dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/charity"
+        android:contentDescription="@string/app_name"
+        style="?android:attr/buttonBarButtonStyle" />
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="90dp"
-        android:background="@color/pastel_green">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="360dp"
-            android:layout_height="530dp"
-            android:layout_marginStart="24dp"
-            app:cardCornerRadius="30dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvRequests"
-                android:layout_width="330dp"
-                android:layout_height="508dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/white" />
-
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="650dp"
-        android:background="@color/white">
-
-        <Button
-            android:id="@+id/homeBtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="42dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/home"
-            android:contentDescription="@string/app_name"
-            style="?android:attr/buttonBarButtonStyle" />
-            <!-- android:textAppearance="" -->
-
-        <Button
-            android:id="@+id/helpRequestBtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="42dp"
-            android:layout_marginTop="16dp"
-            android:text="HR"
-            android:contentDescription="@string/app_name"
-            style="?android:attr/buttonBarButtonStyle" />
-
-        <Button
-            android:id="@+id/charityBtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="42dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/charity"
-            android:contentDescription="@string/app_name"
-            style="?android:attr/buttonBarButtonStyle" />
-
-        <Button
-            android:id="@+id/accountBtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="42dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/account"
-            android:contentDescription="@string/app_name"
-            style="?android:attr/buttonBarButtonStyle" />
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/accountBtn1"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/account"
+        android:contentDescription="@string/app_name" />
 
 </RelativeLayout>
