@@ -7,25 +7,35 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.payward.mobile.databinding.ActivityMainBinding
 import com.payward.mobile.dto.Request
 import com.payward.mobile.dto.Response
 
 class MainActivity : ComponentActivity() {
 
     private lateinit var viewModel: MainViewModel
+
     private var requestList = ArrayList<Request>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.setContentView(R.layout.activity_main)
 
-        val helpRequestButton = findViewById<Button>(R.id.helpRequestBtn)
+        val homeFragment = HomeFragment()
+        val helpRequestFragment = HelpRequestFragment()
+        val charityFragment = CharityFragment()
+
+
+
+       /* val helpRequestButton = findViewById<Button>(R.id.helpRequestBtn1)
         helpRequestButton.setOnClickListener {
             this.setContentView(R.layout.activity_help_request)
         }
@@ -46,7 +56,8 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-        inner class RequestsAdapter(val requests: ArrayList<Request>, val itemPost: Int) : RecyclerView.Adapter<MainActivity.RequestViewHolder>() {
+
+    inner class RequestsAdapter(val requests: ArrayList<Request>, val itemPost: Int) : RecyclerView.Adapter<MainActivity.RequestViewHolder>() {
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RequestViewHolder {
                 val view = LayoutInflater.from(parent.context).inflate(itemPost, parent, false)
@@ -73,7 +84,7 @@ class MainActivity : ComponentActivity() {
             lblUserName.text = request.userId
             lblDescription.text = request.text
 
-        }
+        }*/
     }
 
 }
