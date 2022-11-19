@@ -10,6 +10,7 @@ class FirebaseService {
     var _requests: MutableLiveData<ArrayList<Request>> = MutableLiveData<ArrayList<Request>>()
     var _request = Request()
     private  var _responses = MutableLiveData<List<Response>>()
+    var response = Response()
 
     fun initialize() {
         listenForRequests()
@@ -63,6 +64,19 @@ class FirebaseService {
             Log.d("Firebase", "Save Failed")
         }
 
+    }
+
+    fun respond(request: Request) {
+        val firestore = FirebaseFirestore.getInstance()
+        val collection = firestore.collection("requests").document(request.requestId).collection("responses")
+        response.userId = "1234"
+        val task = collection.add(response)
+        task.addOnSuccessListener {
+            response.responseId = it.id
+        }
+        task.addOnFailureListener {
+            Log.d("Firebase", "Save Failed")
+        }
     }
 
     internal var requests:MutableLiveData<ArrayList<Request>>

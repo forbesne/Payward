@@ -1,5 +1,7 @@
 package com.payward.mobile
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +21,7 @@ import com.payward.mobile.databinding.ActivityMainBinding
 import com.payward.mobile.dto.Request
 import com.payward.mobile.dto.Response
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
 
@@ -43,8 +45,13 @@ class MainActivity : ComponentActivity() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.initializeFirebase()
 
+        var btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
+        btnHelpRequest.setOnClickListener {
+
+        }
         var rvRequests = findViewById<RecyclerView>(R.id.rvRequests)
         rvRequests.hasFixedSize()
+        rvRequests.layoutManager = LinearLayoutManager(applicationContext)
         rvRequests.itemAnimator = DefaultItemAnimator()
         rvRequests.adapter = RequestsAdapter(requestList, R.layout.item_post)
 
@@ -54,6 +61,8 @@ class MainActivity : ComponentActivity() {
             requestList.addAll(requests)
             rvRequests.adapter!!.notifyDataSetChanged()
         }
+
+
     }
 
 
@@ -78,6 +87,7 @@ class MainActivity : ComponentActivity() {
 
         private var lblUserName: TextView = itemView.findViewById(R.id.user_name)
         private var lblDescription: TextView = itemView.findViewById(R.id.description)
+        private var btnRespond: Button = itemView.findViewById(R.id.btnRespond)
 
         fun updateRequest (request: Request) {
 
@@ -85,6 +95,15 @@ class MainActivity : ComponentActivity() {
             lblDescription.text = request.text
 
         }*/
+            btnRespond.setOnClickListener {
+                respondRequest(request)
+            }
+
+        }
+    }
+
+    private fun respondRequest(request: Request) {
+       viewModel.respond(request)
     }
 
 }
