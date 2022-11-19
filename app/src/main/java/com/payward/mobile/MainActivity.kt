@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -18,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.payward.mobile.dto.Request
 import com.payward.mobile.dto.Response
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
     private var requestList = ArrayList<Request>()
@@ -30,6 +31,10 @@ class MainActivity : ComponentActivity() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.initializeFirebase()
 
+        var btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
+        btnHelpRequest.setOnClickListener {
+
+        }
         var rvRequests = findViewById<RecyclerView>(R.id.rvRequests)
         rvRequests.hasFixedSize()
         rvRequests.layoutManager = LinearLayoutManager(applicationContext)
