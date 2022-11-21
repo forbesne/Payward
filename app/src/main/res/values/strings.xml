@@ -5,4 +5,7 @@
     <string name="textview3">TextView</string>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="description">what kind of help do you need?</string>
+    <string name="name">Username</string>
+    <string name="title">Help Request Form</string>
 </resources>

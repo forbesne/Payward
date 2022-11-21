@@ -16,25 +16,43 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.payward.mobile.databinding.ActivityMainBinding
 import com.payward.mobile.dto.Request
 import com.payward.mobile.dto.Response
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: MainViewModel
-    private var requestList = ArrayList<Request>()
+   // private lateinit var viewModel: MainViewModel
+   // private var requestList = ArrayList<Request>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.setContentView(R.layout.activity_main)
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        val homeFragment = HomeFragment()
+        supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, homeFragment).commit()
+
+        var homeButton = findViewById<Button>(R.id.homeBtn)
+        homeButton.setOnClickListener {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.fragmentContainer, homeFragment)
+                commit()
+            }
+        }
+
+        val helpRequestFragment = HelpRequestFragment()
+        var helpRequestButton = findViewById<Button>(R.id.helpRequestBtn)
+        helpRequestButton.setOnClickListener {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.fragmentContainer, helpRequestFragment)
+                commit()
+            }
+        }
+
+
+     /*   viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.initializeFirebase()
 
-        var btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
-        btnHelpRequest.setOnClickListener {
-
-        }
         var rvRequests = findViewById<RecyclerView>(R.id.rvRequests)
         rvRequests.hasFixedSize()
         rvRequests.layoutManager = LinearLayoutManager(applicationContext)
@@ -83,12 +101,12 @@ class MainActivity : AppCompatActivity() {
                 respondRequest(request)
             }
 
-        }
+        }*/
     }
 
-    private fun respondRequest(request: Request) {
+   /* private fun respondRequest(request: Request) {
        viewModel.respond(request)
-    }
+    } */
 
 }
 
