@@ -17,7 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.payward.mobile.databinding.ActivityMainBinding
+//import com.payward.mobile.databinding.ActivityMainBinding
 import com.payward.mobile.dto.Request
 import com.payward.mobile.dto.Response
 import kotlin.reflect.typeOf
@@ -35,22 +35,24 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.home_fragment, container, false)
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.initializeFirebase()
 
-        var rvRequests : RecyclerView = findViewById<RecyclerView>(R.id.rvRequests)
-        rvRequests.hasFixedSize()
-        rvRequests.layoutManager = LinearLayoutManager(applicationContext)
-        rvRequests.itemAnimator = DefaultItemAnimator()
-        rvRequests.adapter = RequestsAdapter(requestList, R.layout.item_post)
+
+        var rvRequests : RecyclerView? = view?.findViewById(R.id.rvRequests)
+        rvRequests?.hasFixedSize()
+        rvRequests?.layoutManager = LinearLayoutManager(context)
+        rvRequests?.itemAnimator = DefaultItemAnimator()
+        rvRequests?.adapter = RequestsAdapter(requestList, R.layout.item_post)
 
         viewModel.requests.observeForever { requests ->
             requestList.removeAll(requestList)
             requestList.addAll(requests)
-            rvRequests.adapter!!.notifyDataSetChanged()
+            rvRequests?.adapter!!.notifyDataSetChanged()
         }
 
     }
