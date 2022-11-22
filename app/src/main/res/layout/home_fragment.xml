@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/pastel_green">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dp"
+        android:background="@color/pastel_green">
+
+        <SearchView
+            android:id="@+id/simpleSearchView"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/white"/>
+
+        <Button
+            android:id="@+id/dms"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/dms"
+            android:contentDescription="@string/app_name"
+            tools:ignore="DuplicateSpeakableTextCheck" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="90dp"
+        android:background="@color/pastel_green">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="360dp"
+            android:layout_height="530dp"
+            android:layout_marginStart="24dp"
+            app:cardCornerRadius="30dp"
+            app:cardBackgroundColor="@color/white">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRequests"
+                android:layout_width="330dp"
+                android:layout_height="508dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white" />
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</RelativeLayout>
