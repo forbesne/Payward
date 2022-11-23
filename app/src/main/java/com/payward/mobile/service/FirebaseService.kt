@@ -2,6 +2,7 @@ package com.payward.mobile.service
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.payward.mobile.dto.Request
 import com.payward.mobile.dto.Response
@@ -11,9 +12,11 @@ class FirebaseService {
     var _request = Request()
     private  var _responses = MutableLiveData<List<Response>>()
     var response = Response()
+    private lateinit var auth: FirebaseAuth
 
     fun initialize() {
         listenForRequests()
+        auth = FirebaseAuth.getInstance()
     }
 
     private fun listenForRequests() {
@@ -40,8 +43,13 @@ class FirebaseService {
 
     fun save(request: Request) {
         val firestore = FirebaseFirestore.getInstance()
+        var user = auth.currentUser
+        user?.let {
+            request.userId = user.displayName.toString()
+        }
         val document = if (request.requestId == null || request.requestId.isEmpty()) {
             //add
+            request.rqStatus = "open"
             firestore.collection("requests").document()
         } else {
             //update
@@ -69,7 +77,10 @@ class FirebaseService {
     fun respond(request: Request) {
         val firestore = FirebaseFirestore.getInstance()
         val collection = firestore.collection("requests").document(request.requestId).collection("responses")
-        response.userId = "1234"
+        var user = auth.currentUser
+        user?.let {
+            response.userId = user.displayName.toString()
+        }
         val task = collection.add(response)
         task.addOnSuccessListener {
             response.responseId = it.id
