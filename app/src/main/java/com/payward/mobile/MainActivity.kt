@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         this.setContentView(R.layout.activity_main)
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.initializeFirebase()
 
         auth = FirebaseAuth.getInstance()
 
@@ -45,6 +44,8 @@ class MainActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Already logged in", Toast.LENGTH_LONG).show()
         }
+
+        viewModel.initializeFirebase()
 
         var btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
         btnHelpRequest.setOnClickListener {
@@ -103,7 +104,34 @@ class MainActivity : AppCompatActivity() {
 
     private fun respondRequest(request: Request) {
        viewModel.respond(request)
+        saveRequest()
     }
 
+    private fun saveRequest() {
+        var request = Request()
+        request.text = "clean clean clean"
+        viewModel.save(request)
+        basicAlert()
+    }
+
+    val positiveButtonClick = { dialog: DialogInterface, which: Int ->
+        Toast.makeText(applicationContext,
+            android.R.string.no, Toast.LENGTH_SHORT).show()
+    }
+
+    fun basicAlert(){
+
+        val builder = AlertDialog.Builder(this)
+
+        with(builder)
+        {
+            setTitle("Saved")
+            setPositiveButton("OK", DialogInterface.OnClickListener(function = positiveButtonClick))
+
+            show()
+        }
+
+
+    }
 }
 
