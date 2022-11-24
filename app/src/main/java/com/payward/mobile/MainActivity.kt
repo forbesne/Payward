@@ -10,17 +10,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.payward.mobile.dto.Request
-import com.payward.mobile.dto.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         this.setContentView(R.layout.activity_main)
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.initializeFirebase()
 
         auth = FirebaseAuth.getInstance()
 
@@ -46,9 +41,13 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Already logged in", Toast.LENGTH_LONG).show()
         }
 
+        viewModel.initializeFirebase()
+
         var btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
         btnHelpRequest.setOnClickListener {
-
+            val intent = Intent(this, RequestActivity::class.java)
+            startActivity(intent)
+            finish()
         }
         var rvRequests = findViewById<RecyclerView>(R.id.rvRequests)
         rvRequests.hasFixedSize()
@@ -103,7 +102,28 @@ class MainActivity : AppCompatActivity() {
 
     private fun respondRequest(request: Request) {
        viewModel.respond(request)
+        basicAlert()
     }
 
+
+
+
+    fun basicAlert(){
+        val positiveButtonClick = { dialog: DialogInterface, which: Int ->
+            Toast.makeText(applicationContext,
+                android.R.string.no, Toast.LENGTH_SHORT).show()
+        }
+        val builder = AlertDialog.Builder(this)
+
+        with(builder)
+        {
+            setTitle("Saved")
+            setPositiveButton("OK", DialogInterface.OnClickListener(function = positiveButtonClick))
+
+            show()
+        }
+
+
+    }
 }
 
