@@ -12,4 +12,5 @@
     <string name="charity3">Salvation Army</string>
     <string name="charity4">Catholic Charities USA</string>
     <string name="donate">DONATE!</string>
+    <string name="helpRequest">Help Request Form</string>
 </resources>
