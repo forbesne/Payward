@@ -6,27 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".RequestActivity">
 
+
     <LinearLayout
         android:layout_width="409dp"
         android:layout_height="729dp"
         android:orientation="vertical"
+        android:gravity="center"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp"
+        android:padding="20dp"
         android:background="@color/pastel_green"
         tools:ignore="MissingConstraints">
+
+        <androidx.cardview.widget.CardView
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="10dp">
 
         <TextView
             android:id="@+id/textView2"
             android:labelFor="@id/txtCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Issue Category"
-            android:textColor="#2E7D32" />
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:text="Issue Category:"
+            android:textColor="@color/grey"
+            android:textStyle="bold"
+            android:textSize="17dp"/>
 
         <EditText
             android:id="@+id/txtCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:ems="10"
             android:minHeight="48dp"
             android:text=""
@@ -39,13 +54,19 @@
             android:labelFor="@id/txtDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:layout_marginTop="90dp"
             android:text="What do you need help with?"
-            android:textColor="#2E7D32" />
+            android:textColor="@color/grey"
+            android:textStyle="bold"
+            android:textSize="17dp"/>
 
         <EditText
             android:id="@+id/txtDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
             android:ems="10"
             android:minHeight="48dp"
             android:text=""
@@ -53,12 +74,26 @@
             android:inputType="text"
             android:autofillHints="" />
 
-        <Button
-            android:id="@+id/btnSubmit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/submit" />
+            <LinearLayout
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="15dp"
+                android:orientation="vertical">
 
+                <Button
+                    android:id="@+id/btnSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="150dp"
+                    android:background="@color/grey"
+                    android:text="@string/submit"
+                    tools:ignore="TextContrastCheck" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
