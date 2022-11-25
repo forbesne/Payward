@@ -26,6 +26,7 @@
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:text="@string/textview"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -54,13 +55,13 @@
                 android:id="@+id/btnRespond"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Response"
-                android:textSize="14dp"
+                android:background="@drawable/round_response_button"
+                android:minHeight="0dp"
+                android:text="Respond"
                 android:textAllCaps="false"
                 android:textColor="@color/grey"
-                android:minHeight="0dp"
-                android:background="@drawable/round_response_button"
-                tools:ignore="TextContrastCheck" />
+                android:textSize="14dp"
+                tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
 
         </LinearLayout>
 
@@ -79,6 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/grey"
+            android:textColor="@color/black"
             android:padding="15dp"
             android:text="@string/textview2"
             tools:text="my car broke down near mason. please help!" />
