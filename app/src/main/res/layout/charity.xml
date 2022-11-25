@@ -39,35 +39,38 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="115dp"
         android:layout_marginStart="17dp"
+        android:background="@color/white"
         app:cardCornerRadius="30dp">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:padding="20dp">
 
         <TextView
             android:id="@+id/charityName1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/textview"
-            android:textSize="14sp"
+            android:text="@string/charity1"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/grey"
+            android:textSize="15dp"
             android:background="@color/white"
             android:layout_marginStart="10dp"
-            android:padding="15dp"
-            tools:text="United Way Worldwide" />
+            android:padding="15dp" />
 
         <Button
             android:id="@+id/charity1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:background="@color/pastel_green"
             android:contentDescription="@string/app_name"
-            tools:text="DONATE!"/>
+            android:background="@drawable/round_donate_button"
+            android:text="@string/donate"
+            android:textColor="@color/grey"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 
@@ -76,6 +79,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:layout_marginTop="240dp"
         android:layout_marginStart="17dp"
         app:cardCornerRadius="30dp">
@@ -84,29 +88,31 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:padding="20dp">
 
             <TextView
                 android:id="@+id/charityName2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/textview"
-                android:textSize="14sp"
+                android:text="@string/charity2"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="@color/grey"
+                android:textSize="15dp"
                 android:background="@color/white"
                 android:layout_marginStart="10dp"
-                android:padding="15dp"
-                tools:text="Feeding America" />
+                android:padding="15dp" />
 
             <Button
                 android:id="@+id/charity2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="84dp"
-                android:background="@color/pastel_green"
                 android:contentDescription="@string/app_name"
-                tools:text="DONATE!"/>
+                android:background="@drawable/round_donate_button"
+                android:text="@string/donate"
+                android:textColor="@color/grey"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
@@ -115,6 +121,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:layout_marginTop="365dp"
         android:layout_marginStart="17dp"
         app:cardCornerRadius="30dp">
@@ -123,29 +130,31 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:padding="20dp">
 
             <TextView
                 android:id="@+id/charityName3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/textview"
-                android:textSize="14sp"
+                android:text="@string/charity3"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="@color/grey"
+                android:textSize="15dp"
                 android:background="@color/white"
                 android:layout_marginStart="10dp"
-                android:padding="15dp"
-                tools:text="Salvation Army" />
+                android:padding="15dp" />
 
             <Button
                 android:id="@+id/charity3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="93dp"
-                android:background="@color/pastel_green"
                 android:contentDescription="@string/app_name"
-                tools:text="DONATE!"/>
+                android:background="@drawable/round_donate_button"
+                android:text="@string/donate"
+                android:textColor="@color/grey"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
@@ -154,6 +163,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:layout_marginTop="490dp"
         android:layout_marginStart="17dp"
         app:cardCornerRadius="30dp">
@@ -162,29 +172,31 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:padding="20dp">
 
             <TextView
                 android:id="@+id/charityName4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/textview"
-                android:textSize="14sp"
+                android:text="@string/charity4"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="@color/grey"
+                android:textSize="15dp"
                 android:background="@color/white"
                 android:layout_marginStart="10dp"
-                android:padding="15dp"
-                tools:text="Catholic Charities USA" />
+                android:padding="15dp" />
 
             <Button
                 android:id="@+id/charity4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:background="@color/pastel_green"
                 android:contentDescription="@string/app_name"
-                tools:text="DONATE!"/>
+                android:background="@drawable/round_donate_button"
+                android:text="@string/donate"
+                android:textColor="@color/grey"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 

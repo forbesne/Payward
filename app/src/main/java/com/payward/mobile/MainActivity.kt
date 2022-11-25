@@ -49,6 +49,14 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        /*var btnCharity = findViewById<Button>(R.id.charityBtn)
+        btnCharity.setOnClickListener {
+            val intent = Intent(this, CharityActivity::class.java)
+            startActivity(intent)
+            finish()
+        }*/
+
         var rvRequests = findViewById<RecyclerView>(R.id.rvRequests)
         rvRequests.hasFixedSize()
         rvRequests.layoutManager = LinearLayoutManager(applicationContext)
