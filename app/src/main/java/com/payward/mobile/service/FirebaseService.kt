@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.payward.mobile.dto.Request
 import com.payward.mobile.dto.Response
+import com.payward.mobile.dto.User
 
 class FirebaseService {
     var _requests: MutableLiveData<ArrayList<Request>> = MutableLiveData<ArrayList<Request>>()
@@ -45,7 +46,9 @@ class FirebaseService {
         val firestore = FirebaseFirestore.getInstance()
         var user = auth.currentUser
         user?.let {
-            request.userId = user.displayName.toString()
+            request.userDisplayName = user.displayName.toString()
+            request.userId = user.uid
+            request.user = user.uid?.let { User(it, user.displayName!!) }
         }
         val document = if (request.requestId == null || request.requestId.isEmpty()) {
             //add
@@ -87,6 +90,28 @@ class FirebaseService {
         }
         task.addOnFailureListener {
             Log.d("Firebase", "Save Failed")
+        }
+    }
+
+    fun createUser() {
+        var firebaseUser = auth.currentUser
+        val uid = firebaseUser?.uid
+        val userName = firebaseUser?.displayName
+        val user = uid?.let { User(it, userName!!) }
+
+        val firestore = FirebaseFirestore.getInstance()
+        val uidRef = uid?.let { firestore.collection("users").document(it) }
+        if (uidRef != null) {
+            uidRef.get().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val document = task.result
+                    if (!document.exists()) {
+                        if (user != null) {
+                            uidRef.set(user)
+                        }
+                    }
+                }
+            }
         }
     }
 
