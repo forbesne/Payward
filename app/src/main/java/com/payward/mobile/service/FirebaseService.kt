@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
+import com.payward.mobile.dto.Message
 import com.payward.mobile.dto.Request
 import com.payward.mobile.dto.Response
 import com.payward.mobile.dto.User
@@ -13,6 +15,7 @@ class FirebaseService {
     var _request = Request()
     private  var _responses = MutableLiveData<List<Response>>()
     var response = Response()
+
     private lateinit var auth: FirebaseAuth
 
     fun initialize() {
@@ -44,13 +47,13 @@ class FirebaseService {
 
     fun save(request: Request) {
         val firestore = FirebaseFirestore.getInstance()
-        var user = auth.currentUser
+        val user = auth.currentUser
         user?.let {
             request.userDisplayName = user.displayName.toString()
             request.userId = user.uid
-            request.user = user.uid?.let { User(it, user.displayName!!) }
+            request.user = user.uid.let { User(it, user.displayName!!) }
         }
-        val document = if (request.requestId == null || request.requestId.isEmpty()) {
+        val document = if (request.requestId.isEmpty()) {
             //add
             request.rqStatus = "open"
             firestore.collection("requests").document()
@@ -80,7 +83,7 @@ class FirebaseService {
     fun respond(request: Request) {
         val firestore = FirebaseFirestore.getInstance()
         val collection = firestore.collection("requests").document(request.requestId).collection("responses")
-        var user = auth.currentUser
+        val user = auth.currentUser
         user?.let {
             response.userId = user.displayName.toString()
         }
@@ -94,7 +97,7 @@ class FirebaseService {
     }
 
     fun createUser() {
-        var firebaseUser = auth.currentUser
+        val firebaseUser = auth.currentUser
         val uid = firebaseUser?.uid
         val userName = firebaseUser?.displayName
         val user = uid?.let { User(it, userName!!) }
@@ -113,6 +116,38 @@ class FirebaseService {
                 }
             }
         }
+    }
+
+    fun sendMessage(
+        roomId: String,
+        fromUser: User,
+        toUid: String,
+        toUser: User,
+        messageText: String
+    ) {
+        val firestore = FirebaseFirestore.getInstance()
+        val fromUid = fromUser.uid
+        var fromRooms = fromUser.rooms
+        if (fromRooms == null) {
+            fromRooms = mutableMapOf()
+        }
+        fromRooms[roomId] = true
+        fromUser.rooms = fromRooms
+        firestore.collection("users").document(fromUid).set(fromUser, SetOptions.merge())
+        firestore.collection("contacts").document(toUid).collection("userContacts").document(fromUid).set(fromUser, SetOptions.merge())
+        firestore.collection("rooms").document(toUid).collection("userRooms").document(roomId).set(fromUser, SetOptions.merge())
+        var toRooms = toUser.rooms
+        if (toRooms == null) {
+            toRooms = mutableMapOf()
+        }
+        toRooms[roomId] = true
+        toUser.rooms = toRooms
+        firestore.collection("users").document(toUid).set(toUser, SetOptions.merge())
+        firestore.collection("contacts").document(fromUid).collection("userContacts").document(toUid).set(toUser, SetOptions.merge())
+        firestore.collection("rooms").document(fromUid).collection("userRooms").document(roomId).set(toUser, SetOptions.merge())
+
+        val message = Message(messageText, fromUid)
+        firestore.collection("messages").document(roomId).collection("roomMessages").add(message)
     }
 
     internal var requests:MutableLiveData<ArrayList<Request>>
