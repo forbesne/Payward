@@ -60,12 +60,12 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-        /*var btnCharity = findViewById<Button>(R.id.charityBtn)
+        var btnCharity = findViewById<Button>(R.id.charityBtn)
         btnCharity.setOnClickListener {
-            val intent = Intent(this, CharityActivity::class.java)
+            val intent = Intent(this, MessageActivity::class.java)
             startActivity(intent)
             finish()
-        }*/
+        }
 
         var rvRequests = findViewById<RecyclerView>(R.id.rvRequests)
         rvRequests.hasFixedSize()
@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
 
         fun updateRequest (request: Request) {
 
-            lblUserName.text = request.userId
+            lblUserName.text = request.userDisplayName
             lblDescription.text = request.text
 
             btnRespond.setOnClickListener {
