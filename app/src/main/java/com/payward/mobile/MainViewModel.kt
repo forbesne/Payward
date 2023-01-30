@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.payward.mobile.dto.Request
 import com.payward.mobile.dto.Response
+import com.payward.mobile.dto.User
 import com.payward.mobile.service.FirebaseService
 import com.payward.mobile.service.RequestService
 
@@ -30,6 +31,20 @@ class MainViewModel : ViewModel() {
 
     fun respond(request: Request) {
         firebaseService.respond(request)
+    }
+
+    fun createUser() {
+        firebaseService.createUser()
+    }
+
+    fun sendMessage(
+        roomId: String,
+        fromUser: User,
+        toUid: String,
+        toUser: User,
+        messageText: String
+    ) {
+        firebaseService.sendMessage(roomId, fromUser, toUid, toUser, messageText)
     }
 
     internal var requests:MutableLiveData<ArrayList<Request>>
