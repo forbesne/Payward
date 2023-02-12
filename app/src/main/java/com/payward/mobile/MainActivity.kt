@@ -11,12 +11,15 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.payward.mobile.dto.Request
+import com.payward.mobile.dto.User
 
 class MainActivity : AppCompatActivity() {
 
@@ -111,6 +114,13 @@ class MainActivity : AppCompatActivity() {
             lblUserName.text = request.userDisplayName
             lblDescription.text = request.text
 
+            var user = auth.currentUser
+            user?.let {
+                if (request.userId == user.uid) {
+                    btnRespond.isVisible = false
+                }
+            }
+
             btnRespond.setOnClickListener {
                 respondRequest(request)
             }
@@ -120,7 +130,37 @@ class MainActivity : AppCompatActivity() {
 
     private fun respondRequest(request: Request) {
        viewModel.respond(request)
-        basicAlert()
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
+        if (firebaseUser != null) {
+            val fromUid = firebaseUser.uid
+            val rootRef = FirebaseFirestore.getInstance()
+            val uidRef = rootRef.collection("users").document(fromUid)
+            uidRef.get().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val document = task.result
+                    if (document.exists()) {
+                        val fromUser = document.toObject(User::class.java)
+
+                        val touidRef = rootRef.collection("users").document(request.userId)
+                        touidRef.get().addOnCompleteListener { taskTo ->
+                            if (taskTo.isSuccessful) {
+                                val documentTo = taskTo.result
+                                if (documentTo.exists()) {
+                                    val toUser = documentTo.toObject(User::class.java)
+
+                                    val intent = Intent(this, ChatActivity::class.java)
+                                    intent.putExtra("fromUser", fromUser)
+                                    intent.putExtra("toUser", toUser)
+                                    intent.putExtra("roomId", "noRoomId")
+                                    startActivity(intent)
+                                    finish()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
 
