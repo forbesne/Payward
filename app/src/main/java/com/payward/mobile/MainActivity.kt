@@ -107,18 +107,18 @@ class MainActivity : AppCompatActivity() {
 
         private var lblUserName: TextView = itemView.findViewById(R.id.username)
         private var lblDescription: TextView = itemView.findViewById(R.id.description)
+        private var lblPoints: TextView = itemView.findViewById(R.id.points)
         private var btnRespond: Button = itemView.findViewById(R.id.btnRespond)
 
         fun updateRequest (request: Request) {
 
             lblUserName.text = request.userDisplayName
             lblDescription.text = request.text
+            lblPoints.text = request.helpingPoints.toString()
 
             var user = auth.currentUser
             user?.let {
-                if (request.userId == user.uid) {
-                    btnRespond.isVisible = false
-                }
+                btnRespond.isVisible = request.userId != user.uid
             }
 
             btnRespond.setOnClickListener {

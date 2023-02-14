@@ -1,10 +1,12 @@
 package com.payward.mobile.service
 
+import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.payward.mobile.ChatActivity
 import com.payward.mobile.dto.Message
 import com.payward.mobile.dto.Request
 import com.payward.mobile.dto.Response
@@ -96,23 +98,56 @@ class FirebaseService {
         }
     }
 
-    fun createUser() {
+    fun transferPoints(toUid: String, points: Int) {
         val firebaseUser = auth.currentUser
-        val uid = firebaseUser?.uid
-        val userName = firebaseUser?.displayName
-        val user = uid?.let { User(it, userName!!) }
-
         val firestore = FirebaseFirestore.getInstance()
-        val uidRef = uid?.let { firestore.collection("users").document(it) }
-        if (uidRef != null) {
+        if (firebaseUser != null) {
+            val fromUid = firebaseUser.uid
+
+            val uidRef = firestore.collection("users").document(fromUid)
             uidRef.get().addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val document = task.result
-                    if (!document.exists()) {
-                        if (user != null) {
-                            uidRef.set(user)
+                    if (document.exists()) {
+                        val fromUser = document.toObject(User::class.java)
+                        if (fromUser != null) {
+                            fromUser.helpingPoints = fromUser.helpingPoints - points
+                            uidRef.set(fromUser)
                         }
                     }
+                }
+            }
+        }
+        val toUidRef = firestore.collection("users").document(toUid)
+        toUidRef.get().addOnCompleteListener { taskTo ->
+            if (taskTo.isSuccessful) {
+                val documentTo = taskTo.result
+                if (documentTo.exists()) {
+                    val toUser = documentTo.toObject(User::class.java)
+                    if (toUser != null) {
+                        toUser.helpingPoints = toUser.helpingPoints + points
+                        toUidRef.set(toUser)
+                    }
+                }
+            }
+        }
+    }
+
+    fun createUser() {
+        val firebaseUser = auth.currentUser
+        val uid = firebaseUser?.uid
+
+        var user = User()
+        user.userName = firebaseUser?.displayName.toString()
+        user.helpingPoints = 20
+
+        val firestore = FirebaseFirestore.getInstance()
+        val uidRef = uid?.let { firestore.collection("users").document(it) }
+        uidRef?.get()?.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val document = task.result
+                if (!document.exists()) {
+                    uidRef.set(user)
                 }
             }
         }

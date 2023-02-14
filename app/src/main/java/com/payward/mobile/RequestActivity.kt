@@ -25,6 +25,7 @@ class RequestActivity : AppCompatActivity() {
             var request = Request()
             request.issueType = findViewById<EditText>(R.id.txtCategory).text.toString()
             request.text = findViewById<EditText>(R.id.txtDescription).text.toString()
+            request.helpingPoints = findViewById<EditText>(R.id.txtPoints).text.toString().toInt()
             viewModel.save(request)
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
