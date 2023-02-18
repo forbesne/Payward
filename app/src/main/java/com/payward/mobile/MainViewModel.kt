@@ -37,6 +37,10 @@ class MainViewModel : ViewModel() {
         firebaseService.createUser()
     }
 
+    fun transferPoints(toUid: String, points: Int) {
+        firebaseService.transferPoints(toUid, points)
+    }
+
     fun sendMessage(
         roomId: String,
         fromUser: User,

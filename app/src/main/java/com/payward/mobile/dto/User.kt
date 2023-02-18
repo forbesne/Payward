@@ -5,6 +5,7 @@ import java.io.Serializable
 
 class User (
     val uid: String = "",
-    val userName: String = "",
+    var userName: String = "",
+    var helpingPoints: Int = 0,
     var rooms: MutableMap<String, Any>? = null
 ) : Serializable

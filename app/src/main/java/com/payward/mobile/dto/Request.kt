@@ -4,7 +4,7 @@ import com.google.firebase.firestore.Exclude
 import java.util.*
 import kotlin.collections.ArrayList
 
-class Request(var requestId : String = "", var userId : String = "", var city : String = "", var issueType : String = "", var text : String = "", var requestDate : Date = Date(), var rqStatus : String = "", var userDisplayName : String = "", var user: User = User()) {
+class Request(var requestId : String = "", var userId : String = "", var city : String = "", var issueType : String = "", var text : String = "", var requestDate : Date = Date(), var rqStatus : String = "", var userDisplayName : String = "", var user: User = User(), var helpingPoints: Int = 0) {
     private var _responses: ArrayList<Response> = ArrayList<Response>()
 
     var response : ArrayList<Response>
