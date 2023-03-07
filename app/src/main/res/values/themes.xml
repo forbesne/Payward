@@ -4,4 +4,7 @@
     <style name="Theme.Payward" parent="Theme.AppCompat">
         <item name="android:statusBarColor">@color/purple_700</item>
     </style>
+    <style name="Circular">
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>
