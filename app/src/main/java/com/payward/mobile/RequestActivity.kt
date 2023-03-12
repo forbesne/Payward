@@ -6,12 +6,15 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.lifecycle.ViewModelProvider
+import com.payward.mobile.dto.LocationDetails
 import com.payward.mobile.dto.Request
 
 class RequestActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var btnSubmit: Button
+    private lateinit var appViewModel: AppViewModel
+    private lateinit var locationDetails: LocationDetails
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +22,11 @@ class RequestActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.initializeFirebase()
+        appViewModel = ViewModelProvider(this).get(AppViewModel::class.java)
+
+        appViewModel.getLocationLiveData().observeForever{
+            locationDetails = it
+        }
 
         btnSubmit = findViewById(R.id.btnSubmit)
         btnSubmit.setOnClickListener {
@@ -26,6 +34,8 @@ class RequestActivity : AppCompatActivity() {
             request.issueType = findViewById<EditText>(R.id.txtCategory).text.toString()
             request.text = findViewById<EditText>(R.id.txtDescription).text.toString()
             request.helpingPoints = findViewById<EditText>(R.id.txtPoints).text.toString().toInt()
+            request.latitude = locationDetails.latitude
+            request.longitude = locationDetails.longitude
             viewModel.save(request)
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
