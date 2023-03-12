@@ -1,5 +1,6 @@
 package com.payward.mobile
 
+import android.Manifest
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.payward.mobile.dto.LocationDetails
 import com.payward.mobile.dto.Request
 import com.payward.mobile.dto.User
 
@@ -27,7 +30,8 @@ class MainActivity : AppCompatActivity() {
     private var requestList = ArrayList<Request>()
     private lateinit var auth: FirebaseAuth
     private lateinit var logoutBtn: Button
-
+    private lateinit var appViewModel: AppViewModel
+    private lateinit var locationDetails: LocationDetails
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,6 +88,35 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        requestLocationPermissions()
+    }
+
+    private fun requestLocationPermissions() {
+        val locationPermissionRequest = registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            when {
+                permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
+                    // Precise location access granted.
+                    requestLocationUpdates()
+                }
+                permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+                    // Only approximate location access granted.
+                } else -> {
+                // No location access granted.
+                Toast.makeText(this, "GPS Unavailable", Toast.LENGTH_LONG).show()
+            }
+            }
+        }
+
+// ...
+
+// Before you perform the actual permission request, check whether your app
+// already has the permissions, and whether your app needs to show a permission
+// rationale dialog. For more details, see Request permissions.
+        locationPermissionRequest.launch(arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION))
     }
 
         inner class RequestsAdapter(val requests: ArrayList<Request>, val itemPost: Int) : RecyclerView.Adapter<MainActivity.RequestViewHolder>() {
@@ -128,6 +161,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    internal fun requestLocationUpdates() {
+        appViewModel = ViewModelProvider(this).get(AppViewModel::class.java)
+
+//        appViewModel.startLocationUpdates()
+
+        appViewModel.getLocationLiveData().observeForever{
+            locationDetails = it
+        }
+
+    }
     private fun respondRequest(request: Request) {
        viewModel.respond(request)
         val firebaseUser = FirebaseAuth.getInstance().currentUser
@@ -163,25 +206,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
-
-    fun basicAlert(){
-        val positiveButtonClick = { dialog: DialogInterface, which: Int ->
-            Toast.makeText(applicationContext,
-                android.R.string.no, Toast.LENGTH_SHORT).show()
-        }
-        val builder = AlertDialog.Builder(this)
-
-        with(builder)
-        {
-            setTitle("Saved")
-            setPositiveButton("OK", DialogInterface.OnClickListener(function = positiveButtonClick))
-
-            show()
-        }
-
-
-    }
 }
 
