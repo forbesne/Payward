@@ -14,4 +14,12 @@
     <string name="donate">DONATE!</string>
     <string name="helpRequest">Help Request Form</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string-array name="categories_array">
+        <item>All Categories</item>
+        <item>Car Issues</item>
+        <item>Children</item>
+        <item>Pets</item>
+        <item>Furniture Assembly</item>
+        <item>Home Repairs</item>
+    </string-array>
 </resources>

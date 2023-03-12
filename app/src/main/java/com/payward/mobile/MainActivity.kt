@@ -23,19 +23,25 @@ import com.payward.mobile.dto.LocationDetails
 import com.payward.mobile.dto.Request
 import com.payward.mobile.dto.User
 import java.math.RoundingMode
+import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
     private var requestList = ArrayList<Request>()
+    private var requestListFiltered = ArrayList<Request>()
     private lateinit var auth: FirebaseAuth
     private lateinit var logoutBtn: Button
     private lateinit var appViewModel: AppViewModel
     private lateinit var locationDetails: LocationDetails
+    lateinit var categorySelected: String
+    var milesSelected by Delegates.notNull<Double>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.setContentView(R.layout.activity_main)
+
+milesSelected = 10.0;
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
@@ -78,12 +84,14 @@ class MainActivity : AppCompatActivity() {
         rvRequests.hasFixedSize()
         rvRequests.layoutManager = LinearLayoutManager(applicationContext)
         rvRequests.itemAnimator = DefaultItemAnimator()
-        rvRequests.adapter = RequestsAdapter(requestList, R.layout.item_post)
+        rvRequests.adapter = RequestsAdapter(requestListFiltered, R.layout.item_post)
 
         viewModel.requests.observeForever {
                 requests ->
             requestList.removeAll(requestList)
             requestList.addAll(requests)
+            requestListFiltered.removeAll(requestList)
+            requestListFiltered.addAll(requests)
             rvRequests.adapter!!.notifyDataSetChanged()
         }
 
@@ -91,6 +99,36 @@ class MainActivity : AppCompatActivity() {
         btnFilter.setOnClickListener {
             (rvRequests.adapter as RequestsAdapter).getFilter().filter("10")
         }
+
+        val categoryList = resources.getStringArray(R.array.categories_array)
+
+        val spinner: Spinner = findViewById(R.id.spinnerCategories)
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.categories_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
+
+        spinner.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                categorySelected = categoryList[position]
+//                Toast.makeText(this@MainActivity,
+//                    " " +
+//                            "" + categoryList[position], Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // write code to perform some action
+            }
+        }
+
 
         requestLocationPermissions()
     }
@@ -146,15 +184,26 @@ class MainActivity : AppCompatActivity() {
             private val requestFilter: Filter = object : Filter() {
                 override fun performFiltering(constraint: CharSequence?): FilterResults? {
                     val filteredList: MutableList<Request> = java.util.ArrayList()
-                    val filterMiles = constraint.toString().toDouble()
+                    val filterMiles = milesSelected
                     for (request in requestList) {
 
-                        if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
-                            val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.29345029085822, -84.45687723750659)
-                            if (milesDistance < filterMiles) {
-                                filteredList.add(request)
-                            }
 
+                        if (categorySelected == "All Categories") {
+                            if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
+                                val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.29345029085822, -84.45687723750659)
+                                if (milesDistance < filterMiles) {
+                                    filteredList.add(request)
+                                }
+
+                            }
+                        }
+                        if (categorySelected == request.issueType) {
+                            if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
+                                val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.29345029085822, -84.45687723750659)
+                                if (milesDistance < filterMiles) {
+                                    filteredList.add(request)
+                                }
+                            }
                         }
                     }
                     val results = FilterResults()
@@ -163,8 +212,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun publishResults(constraint: CharSequence?, results: FilterResults) {
-                    requestList!!.clear()
-                    requestList!!.addAll((results.values as List<Request>))
+                    requestListFiltered!!.clear()
+                    requestListFiltered!!.addAll((results.values as List<Request>))
                     notifyDataSetChanged()
                 }
             }
@@ -176,17 +225,23 @@ class MainActivity : AppCompatActivity() {
         private var lblDescription: TextView = itemView.findViewById(R.id.description)
         private var lblPoints: TextView = itemView.findViewById(R.id.points)
         private var btnRespond: Button = itemView.findViewById(R.id.btnRespond)
+        private var lblCategory: TextView = itemView.findViewById(R.id.txtCategory)
+        private var lblDistance: TextView = itemView.findViewById(R.id.distance)
 
         fun updateRequest (request: Request) {
 
             lblUserName.text = request.userDisplayName
             lblDescription.text = request.text
             lblPoints.text = request.helpingPoints.toString()
+            lblCategory.text = request.issueType
+            lblDistance.text = ""
 
             if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
                 val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.29345029085822, -84.45687723750659)
-                lblDescription.text = "Distance: " + milesDistance.toString() + " miles"
-
+                lblDistance.text = "Distance: " + milesDistance.toString() + " miles"
+            }
+            else {
+                lblDistance.text = "Location not provided"
             }
             var user = auth.currentUser
             user?.let {
