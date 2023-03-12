@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth
         private lateinit var emailEt: EditText
         private lateinit var passwordEt: EditText
         private lateinit var loginBtn: Button
+        private lateinit var signupBtn: Button
 
 
         override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +30,7 @@ import com.google.firebase.auth.FirebaseAuth
             emailEt = findViewById(R.id.email_edt_text)
             passwordEt = findViewById(R.id.pass_edt_text)
             loginBtn = findViewById(R.id.login_btn)
+            signupBtn = findViewById(R.id.signup_btn)
 
 
             auth = FirebaseAuth.getInstance()
@@ -58,7 +60,11 @@ import com.google.firebase.auth.FirebaseAuth
                         })
                 }
             }
-
+            signupBtn.setOnClickListener{
+                val intent = Intent(this, Signup::class.java)
+                startActivity(intent)
+                finish()
+            }
 
         }
     }

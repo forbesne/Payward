@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
     private var requestList = ArrayList<Request>()
     private lateinit var auth: FirebaseAuth
-    private lateinit var logoutBtn: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,14 +44,6 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Already logged in", Toast.LENGTH_LONG).show()
         }
 
-        logoutBtn = findViewById(R.id.logout_btn)
-
-        logoutBtn.setOnClickListener{
-            FirebaseAuth.getInstance().signOut()
-            val intent = Intent(this, MainFragment::class.java)
-            startActivity(intent)
-            finish()
-        }
 
         viewModel.initializeFirebase()
 

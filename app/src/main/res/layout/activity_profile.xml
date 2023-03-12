@@ -12,6 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp">
+
             <LinearLayout
                 android:padding="8dp"
                 android:orientation="horizontal"
@@ -39,6 +40,7 @@
                         android:src="@drawable/ic_notification" />
 
                 </RelativeLayout>
+
 
             </LinearLayout>
             <LinearLayout
@@ -86,6 +88,14 @@
                 </LinearLayout>
             </ScrollView>
 
+            <Button
+                android:id="@+id/logout_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Log Out" />
+
+
         </LinearLayout>
+
 
 </LinearLayout>

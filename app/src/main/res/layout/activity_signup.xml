@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainFragment">
+
+    <LinearLayout
+        android:id="@+id/signIn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@color/pastel_green"
+        android:padding="25dp"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="10dp">
+
+            <EditText
+                android:id="@+id/email_edt_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="25dp"
+                android:paddingLeft="45dp"
+                android:hint="Email"
+                android:drawableStart="@drawable/email"
+                android:drawablePadding="16dp"
+                android:minHeight="48dp"
+                android:textColor="@color/black"
+                android:textStyle="italic"
+                android:textColorHint="@color/grey" />
+
+            <EditText
+                android:id="@+id/pass_edt_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="75dp"
+                android:paddingLeft="45dp"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:drawableStart="@drawable/password"
+                android:drawablePadding="16dp"
+                android:minHeight="48dp"
+                android:textColor="@color/black"
+                android:textStyle="italic"
+                android:textColorHint="@color/grey" />
+
+            <LinearLayout
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="15dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/signup_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="135dp"
+                    android:background="@color/pastel_green"
+                    android:textSize="16dp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/grey"
+                    tools:ignore="TextContrastCheck"
+                    android:text="Sign Up"/>
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/login_btn"
+            android:layout_width="236dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Log in" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
