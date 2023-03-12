@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
 
         var btnCharity = findViewById<Button>(R.id.charityBtn)
         btnCharity.setOnClickListener {
-            val intent = Intent(this, MessageActivity::class.java)
+            val intent = Intent(this, MapsActivity::class.java)
             startActivity(intent)
             finish()
         }
