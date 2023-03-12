@@ -4,13 +4,12 @@ import android.Manifest
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -23,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.payward.mobile.dto.LocationDetails
 import com.payward.mobile.dto.Request
 import com.payward.mobile.dto.User
+import java.math.RoundingMode
 
 class MainActivity : AppCompatActivity() {
 
@@ -87,6 +87,10 @@ class MainActivity : AppCompatActivity() {
             rvRequests.adapter!!.notifyDataSetChanged()
         }
 
+        var btnFilter = findViewById<Button>(R.id.filter_btn)
+        btnFilter.setOnClickListener {
+            (rvRequests.adapter as RequestsAdapter).getFilter().filter("10")
+        }
 
         requestLocationPermissions()
     }
@@ -119,7 +123,7 @@ class MainActivity : AppCompatActivity() {
             Manifest.permission.ACCESS_COARSE_LOCATION))
     }
 
-        inner class RequestsAdapter(val requests: ArrayList<Request>, val itemPost: Int) : RecyclerView.Adapter<MainActivity.RequestViewHolder>() {
+        inner class RequestsAdapter(val requests: ArrayList<Request>, val itemPost: Int) : RecyclerView.Adapter<MainActivity.RequestViewHolder>(), Filterable {
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RequestViewHolder {
                 val view = LayoutInflater.from(parent.context).inflate(itemPost, parent, false)
@@ -133,6 +137,36 @@ class MainActivity : AppCompatActivity() {
 
             override fun getItemCount(): Int {
                 return requests.size
+            }
+
+            override fun getFilter(): Filter {
+                return requestFilter
+            }
+
+            private val requestFilter: Filter = object : Filter() {
+                override fun performFiltering(constraint: CharSequence?): FilterResults? {
+                    val filteredList: MutableList<Request> = java.util.ArrayList()
+                    val filterMiles = constraint.toString().toDouble()
+                    for (request in requestList) {
+
+                        if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
+                            val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.29345029085822, -84.45687723750659)
+                            if (milesDistance < filterMiles) {
+                                filteredList.add(request)
+                            }
+
+                        }
+                    }
+                    val results = FilterResults()
+                    results.values = filteredList
+                    return results
+                }
+
+                override fun publishResults(constraint: CharSequence?, results: FilterResults) {
+                    requestList!!.clear()
+                    requestList!!.addAll((results.values as List<Request>))
+                    notifyDataSetChanged()
+                }
             }
         }
 
@@ -149,6 +183,11 @@ class MainActivity : AppCompatActivity() {
             lblDescription.text = request.text
             lblPoints.text = request.helpingPoints.toString()
 
+            if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
+                val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.29345029085822, -84.45687723750659)
+                lblDescription.text = "Distance: " + milesDistance.toString() + " miles"
+
+            }
             var user = auth.currentUser
             user?.let {
                 btnRespond.isVisible = request.userId != user.uid
@@ -171,6 +210,17 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+    private fun getDistanceInMiles(firstLatitude: Double, firstLongitude: Double,
+                                   secondLatitude: Double, secondLongitude: Double): Double {
+        val resultMeters = FloatArray(1)
+        Location.distanceBetween(firstLatitude, firstLongitude,
+            secondLatitude, secondLongitude, resultMeters)
+        val resultMiles = resultMeters[0]*0.000621371192
+        val distanceMiles = (resultMiles).toBigDecimal().setScale(1, RoundingMode.UP).toDouble()
+        return distanceMiles
+    }
+
     private fun respondRequest(request: Request) {
        viewModel.respond(request)
         val firebaseUser = FirebaseAuth.getInstance().currentUser
