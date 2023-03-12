@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
     private var requestList = ArrayList<Request>()
     private var requestListFiltered = ArrayList<Request>()
     private lateinit var auth: FirebaseAuth
-    private lateinit var logoutBtn: Button
     private lateinit var appViewModel: AppViewModel
     private lateinit var locationDetails: LocationDetails
     lateinit var categorySelected: String
@@ -55,14 +54,6 @@ milesSelected = 10.0;
             Toast.makeText(this, "Already logged in", Toast.LENGTH_LONG).show()
         }
 
-        logoutBtn = findViewById(R.id.logout_btn)
-
-        logoutBtn.setOnClickListener{
-            FirebaseAuth.getInstance().signOut()
-            val intent = Intent(this, MainFragment::class.java)
-            startActivity(intent)
-            finish()
-        }
 
         viewModel.initializeFirebase()
 
