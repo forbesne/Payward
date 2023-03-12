@@ -13,4 +13,5 @@
     <string name="charity4">Catholic Charities USA</string>
     <string name="donate">DONATE!</string>
     <string name="helpRequest">Help Request Form</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
