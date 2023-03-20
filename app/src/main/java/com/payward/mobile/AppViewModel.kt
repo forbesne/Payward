@@ -1,0 +1,12 @@
+package com.payward.mobile
+
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+
+class AppViewModel(application: Application): AndroidViewModel(application) {
+    private val locationLiveData = LocationLiveData(application)
+    fun getLocationLiveData() = locationLiveData
+    fun startLocationUpdates() {
+        locationLiveData.startLocationUpdates()
+    }
+}

@@ -74,6 +74,25 @@
         android:orientation="vertical"
         android:paddingTop="35dp">
 
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey"
+            android:textColor="@color/black"
+            android:padding="15dp"
+            android:text="@string/textview2"
+            tools:text="Car Issues" />
+
+        <TextView
+            android:id="@+id/txtCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey"
+            android:textColor="@color/black"
+            android:padding="15dp"
+            android:text="@string/textview2"
+            tools:text="Car Issues" />
 
         <TextView
             android:id="@+id/description"
