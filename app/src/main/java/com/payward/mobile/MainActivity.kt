@@ -79,9 +79,8 @@ class MainActivity : AppCompatActivity() {
                 requests ->
             requestList.removeAll(requestList)
             requestList.addAll(requests)
-            requestListFiltered.removeAll(requestList)
-            requestListFiltered.addAll(requests)
             rvRequests.adapter!!.notifyDataSetChanged()
+            (rvRequests.adapter as RequestsAdapter).getFilter().filter("10")
         }
 
         var btnFilter = findViewById<Button>(R.id.filter_btn)
@@ -175,22 +174,22 @@ class MainActivity : AppCompatActivity() {
                     val filteredList: MutableList<Request> = java.util.ArrayList()
                     val filterMiles = milesSelected
                     for (request in requestList) {
+                        if (request.rqStatus == "open") {
+                            if (categorySelected == "All Categories") {
+                                if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
+                                    val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.29345029085822, -84.45687723750659)
+                                    if (milesDistance < filterMiles) {
+                                        filteredList.add(request)
+                                    }
 
-
-                        if (categorySelected == "All Categories") {
-                            if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
-                                val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.29345029085822, -84.45687723750659)
-                                if (milesDistance < filterMiles) {
-                                    filteredList.add(request)
                                 }
-
                             }
-                        }
-                        if (categorySelected == request.issueType) {
-                            if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
-                                val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.29345029085822, -84.45687723750659)
-                                if (milesDistance < filterMiles) {
-                                    filteredList.add(request)
+                            if (categorySelected == request.issueType) {
+                                if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
+                                    val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.29345029085822, -84.45687723750659)
+                                    if (milesDistance < filterMiles) {
+                                        filteredList.add(request)
+                                    }
                                 }
                             }
                         }

@@ -128,6 +128,12 @@ class FirebaseService {
         }
     }
 
+    fun acceptHelp(request: Request, toUid: String) {
+        request.rqStatus = "closed"
+        save(request)
+        transferPoints(toUid, request.helpingPoints)
+
+    }
     fun transferPoints(toUid: String, points: Int) {
         val firebaseUser = auth.currentUser
         val firestore = FirebaseFirestore.getInstance()

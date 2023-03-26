@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -73,6 +74,26 @@ class ChatActivity : AppCompatActivity() {
         val btnAccept = findViewById<Button>(R.id.btnAccept)
         if (fromUid != request.userId) {
             btnAccept.isVisible = false
+        }
+        btnAccept.setOnClickListener {
+
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("Are you sure you want to accept help and close this request?")
+                .setCancelable(false)
+                .setPositiveButton("Yes") { dialog, id ->
+                    viewModel.acceptHelp(request, toUid)
+                }
+                .setNegativeButton("No") { dialog, id ->
+                    // Dismiss the dialog
+                    dialog.dismiss()
+                }
+            val alert = builder.create()
+            alert.show()
+
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+
         }
 
         val btnChat = findViewById<Button>(R.id.btnSend)

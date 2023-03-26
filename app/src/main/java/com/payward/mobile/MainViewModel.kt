@@ -42,6 +42,9 @@ class MainViewModel : ViewModel() {
         firebaseService.transferPoints(toUid, points)
     }
 
+    fun acceptHelp(request: Request, toUid: String) {
+        firebaseService.acceptHelp(request, toUid)
+    }
     fun sendMessage(
         roomId: String,
         msgRequest: Request,
