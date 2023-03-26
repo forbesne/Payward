@@ -1,8 +1,6 @@
 package com.payward.mobile
 
 import android.Manifest
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.location.Location
 import android.os.Bundle
@@ -40,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         this.setContentView(R.layout.activity_main)
 
-milesSelected = 10.0;
+        milesSelected = 10.0
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
@@ -66,7 +64,7 @@ milesSelected = 10.0;
 
         var btnCharity = findViewById<Button>(R.id.charityBtn)
         btnCharity.setOnClickListener {
-            val intent = Intent(this, MapsActivity::class.java)
+            val intent = Intent(this, MessageActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -291,6 +289,7 @@ milesSelected = 10.0;
                                     intent.putExtra("fromUser", fromUser)
                                     intent.putExtra("toUser", toUser)
                                     intent.putExtra("roomId", "noRoomId")
+                                    intent.putExtra("request", request)
                                     startActivity(intent)
                                     finish()
                                 }
