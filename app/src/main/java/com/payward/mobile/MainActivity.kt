@@ -69,6 +69,13 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
+        var btnProfile = findViewById<Button>(R.id.btnProfile)
+        btnProfile.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         var rvRequests = findViewById<RecyclerView>(R.id.rvRequests)
         rvRequests.hasFixedSize()
         rvRequests.layoutManager = LinearLayoutManager(applicationContext)
@@ -79,8 +86,9 @@ class MainActivity : AppCompatActivity() {
                 requests ->
             requestList.removeAll(requestList)
             requestList.addAll(requests)
+            requestListFiltered.removeAll(requestListFiltered)
+            requestListFiltered.addAll(requests)
             rvRequests.adapter!!.notifyDataSetChanged()
-            (rvRequests.adapter as RequestsAdapter).getFilter().filter("10")
         }
 
         var btnFilter = findViewById<Button>(R.id.filter_btn)
@@ -200,8 +208,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun publishResults(constraint: CharSequence?, results: FilterResults) {
-                    requestListFiltered!!.clear()
-                    requestListFiltered!!.addAll((results.values as List<Request>))
+                    requestListFiltered.clear()
+                    requestListFiltered.addAll((results.values as List<Request>))
                     notifyDataSetChanged()
                 }
             }
