@@ -1,8 +1,6 @@
 package com.payward.mobile
 
 import android.Manifest
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.location.Location
 import android.os.Bundle
@@ -40,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         this.setContentView(R.layout.activity_main)
 
-milesSelected = 10.0;
+        milesSelected = 10.0
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
@@ -66,7 +64,7 @@ milesSelected = 10.0;
 
         var btnCharity = findViewById<Button>(R.id.charityBtn)
         btnCharity.setOnClickListener {
-            val intent = Intent(this, MapsActivity::class.java)
+            val intent = Intent(this, MessageActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -81,9 +79,8 @@ milesSelected = 10.0;
                 requests ->
             requestList.removeAll(requestList)
             requestList.addAll(requests)
-            requestListFiltered.removeAll(requestList)
-            requestListFiltered.addAll(requests)
             rvRequests.adapter!!.notifyDataSetChanged()
+            (rvRequests.adapter as RequestsAdapter).getFilter().filter("10")
         }
 
         var btnFilter = findViewById<Button>(R.id.filter_btn)
@@ -177,22 +174,22 @@ milesSelected = 10.0;
                     val filteredList: MutableList<Request> = java.util.ArrayList()
                     val filterMiles = milesSelected
                     for (request in requestList) {
+                        if (request.rqStatus == "open") {
+                            if (categorySelected == "All Categories") {
+                                if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
+                                    val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.29345029085822, -84.45687723750659)
+                                    if (milesDistance < filterMiles) {
+                                        filteredList.add(request)
+                                    }
 
-
-                        if (categorySelected == "All Categories") {
-                            if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
-                                val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.29345029085822, -84.45687723750659)
-                                if (milesDistance < filterMiles) {
-                                    filteredList.add(request)
                                 }
-
                             }
-                        }
-                        if (categorySelected == request.issueType) {
-                            if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
-                                val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.29345029085822, -84.45687723750659)
-                                if (milesDistance < filterMiles) {
-                                    filteredList.add(request)
+                            if (categorySelected == request.issueType) {
+                                if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
+                                    val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.29345029085822, -84.45687723750659)
+                                    if (milesDistance < filterMiles) {
+                                        filteredList.add(request)
+                                    }
                                 }
                             }
                         }
@@ -291,6 +288,7 @@ milesSelected = 10.0;
                                     intent.putExtra("fromUser", fromUser)
                                     intent.putExtra("toUser", toUser)
                                     intent.putExtra("roomId", "noRoomId")
+                                    intent.putExtra("request", request)
                                     startActivity(intent)
                                     finish()
                                 }

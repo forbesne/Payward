@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.payward.mobile.dto.Request
 import com.payward.mobile.dto.Response
 import com.payward.mobile.dto.User
+import com.payward.mobile.dto.UserRoom
 import com.payward.mobile.service.FirebaseService
 import com.payward.mobile.service.RequestService
 
@@ -41,14 +42,18 @@ class MainViewModel : ViewModel() {
         firebaseService.transferPoints(toUid, points)
     }
 
+    fun acceptHelp(request: Request, toUid: String) {
+        firebaseService.acceptHelp(request, toUid)
+    }
     fun sendMessage(
         roomId: String,
+        msgRequest: Request,
         fromUser: User,
         toUid: String,
         toUser: User,
         messageText: String
     ) {
-        firebaseService.sendMessage(roomId, fromUser, toUid, toUser, messageText)
+        firebaseService.sendMessage(roomId, msgRequest, fromUser, toUid, toUser, messageText)
     }
 
     internal var requests:MutableLiveData<ArrayList<Request>>
@@ -58,4 +63,13 @@ class MainViewModel : ViewModel() {
     internal var request:Request
         get() { return firebaseService.request}
         set(value) {firebaseService.request = value}
+
+    internal var userRooms:MutableLiveData<ArrayList<UserRoom>>
+        get() { return firebaseService.userRooms}
+        set(value) {firebaseService.userRooms = value}
+
+    internal var userRoom:UserRoom
+        get() { return firebaseService.userRoom}
+        set(value) {firebaseService.userRoom = value}
+
 }

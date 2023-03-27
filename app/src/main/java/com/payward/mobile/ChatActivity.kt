@@ -1,5 +1,6 @@
 package com.payward.mobile
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
@@ -17,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.payward.mobile.dto.Message
+import com.payward.mobile.dto.Request
 import com.payward.mobile.dto.User
 
 class ChatActivity : AppCompatActivity() {
@@ -25,13 +29,13 @@ class ChatActivity : AppCompatActivity() {
     private var adapter: MessageAdapter? = null
     private lateinit var auth: FirebaseAuth
     private lateinit var viewModel: MainViewModel
+    private var requestId: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
         rootRef = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
@@ -39,12 +43,14 @@ class ChatActivity : AppCompatActivity() {
 
         val fromUser = intent.extras?.get("fromUser") as User
         fromUid = fromUser.uid
-        var fromRooms = fromUser.rooms
+        val fromRooms = fromUser.rooms
         val toUser = intent.extras!!.get("toUser") as User
         val toUid = toUser.uid
-        var toRooms = toUser.rooms
+        val toRooms = toUser.rooms
 
         var roomId = intent.extras!!.get("roomId") as String
+        val request = intent.extras?.get("request") as Request
+        requestId = request.requestId
 
         if (roomId == "noRoomId") {
             roomId = rootRef!!.collection("messages").document().id
@@ -52,26 +58,65 @@ class ChatActivity : AppCompatActivity() {
                 for ((key, _) in fromRooms) {
                     if (toRooms != null) {
                         if (toRooms.contains(key)) {
-                            roomId = key
+                            if (toRooms.getValue(key) == requestId) {
+                                roomId = key
+                            }
                         }
                     }
                 }
             }
         }
-        var btnChat = findViewById<Button>(R.id.btnSend)
+
+        val txtRequest = findViewById<TextView>(R.id.txtRequest)
+        txtRequest.text = request.text
+
+
+        val btnAccept = findViewById<Button>(R.id.btnAccept)
+        if (fromUid != request.userId) {
+            btnAccept.isVisible = false
+        }
+        btnAccept.setOnClickListener {
+
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("Are you sure you want to accept help and close this request?")
+                .setCancelable(false)
+                .setPositiveButton("Yes") { dialog, id ->
+                    viewModel.acceptHelp(request, toUid)
+                }
+                .setNegativeButton("No") { dialog, id ->
+                    // Dismiss the dialog
+                    dialog.dismiss()
+                }
+            val alert = builder.create()
+            alert.show()
+
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+
+        }
+
+        val btnChat = findViewById<Button>(R.id.btnSend)
         btnChat.setOnClickListener {
 
             val messageText = findViewById<EditText>(R.id.etMessage).text.toString()
 
-            viewModel.sendMessage(roomId, fromUser, toUid, toUser, messageText)
+            viewModel.sendMessage(roomId, request, fromUser, toUid, toUser, messageText)
 
             findViewById<EditText>(R.id.etMessage).text.clear()
+        }
+
+        val homeBtn = findViewById<Button>(R.id.homeBtn)
+        homeBtn.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         val query = rootRef!!.collection("messages").document(roomId).collection("roomMessages").orderBy("sentAt", Query.Direction.ASCENDING)
         val options = FirestoreRecyclerOptions.Builder<Message>().setQuery(query, Message::class.java).build()
         adapter = MessageAdapter(options)
-        var recycler_view = findViewById<RecyclerView>(R.id.recyclerView)
+        val recycler_view = findViewById<RecyclerView>(R.id.recyclerView)
         recycler_view.adapter = adapter
 
         title = toUser.userName
@@ -108,7 +153,7 @@ class ChatActivity : AppCompatActivity() {
         }
 
         override fun onDataChanged() {
-            var recycler_view = findViewById<RecyclerView>(R.id.recyclerView)
+            val recycler_view = findViewById<RecyclerView>(R.id.recyclerView)
             recycler_view.layoutManager?.scrollToPosition(itemCount - 1)
         }
     }
