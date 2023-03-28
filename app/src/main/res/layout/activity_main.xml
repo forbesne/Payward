@@ -70,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="650dp"
-        android:background="@color/white">
+        android:background="#5A595B">
 
         <Button
             android:id="@+id/homeBtn"
@@ -116,17 +116,15 @@
     </LinearLayout>
 
 
-
     <Button
         android:id="@+id/filter_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="96dp"
+        android:layout_height="50dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="186dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="300dp"
         android:layout_toEndOf="@+id/logout_btn"
         android:text="Filter" />
-
 
 
 </RelativeLayout>

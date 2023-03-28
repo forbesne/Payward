@@ -33,7 +33,7 @@
             android:paddingLeft="20dp"
             android:paddingTop="20dp"
             android:text="Issue Category:"
-            android:textColor="@color/grey"
+            android:textColor="#5A595B"
             android:textStyle="bold"
             android:textSize="17dp"/>
 
@@ -45,7 +45,7 @@
             android:ems="10"
             android:minHeight="48dp"
             android:text=""
-            android:textColor="#2E7D32"
+            android:textColor="@color/black"
             android:inputType="text"
             android:autofillHints="" />
 
@@ -58,7 +58,7 @@
             android:paddingTop="10dp"
             android:layout_marginTop="90dp"
             android:text="What do you need help with?"
-            android:textColor="@color/grey"
+            android:textColor="#5A595B"
             android:textStyle="bold"
             android:textSize="17dp"/>
 
@@ -70,7 +70,7 @@
             android:ems="10"
             android:minHeight="48dp"
             android:text=""
-            android:textColor="#2E7D32"
+            android:textColor="@color/black"
             android:inputType="text"
             android:autofillHints="" />
 
@@ -87,7 +87,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="150dp"
-                    android:background="@color/grey"
+                    android:background="#5A595B"
                     android:text="@string/submit"
                     tools:ignore="TextContrastCheck" />
 
@@ -102,7 +102,8 @@
             android:ems="10"
             android:inputType="text"
             android:minHeight="48dp"
-            android:text="Points" />
+            android:textColor="#5A595B"
+            android:text="Points:" />
 
     </LinearLayout>
 
@@ -111,7 +112,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="650dp"
-        android:background="@color/white">
+        android:background="#5A595B">
 
         <Button
             android:id="@+id/homeBtn"
