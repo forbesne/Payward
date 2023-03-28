@@ -10,10 +10,10 @@ import com.payward.mobile.dto.*
 class FirebaseService {
     var _requests: MutableLiveData<ArrayList<Request>> = MutableLiveData<ArrayList<Request>>()
     var _request = Request()
-    private  var _responses = MutableLiveData<List<Response>>()
     var response = Response()
     var _userRooms: MutableLiveData<ArrayList<UserRoom>> = MutableLiveData<ArrayList<UserRoom>>()
     var _userRoom = UserRoom()
+    var _user: MutableLiveData<User> = MutableLiveData<User>()
 
     private lateinit var auth: FirebaseAuth
 
@@ -22,9 +22,36 @@ class FirebaseService {
         auth = FirebaseAuth.getInstance()
         if (auth.currentUser != null) {
             listenForUserRooms()
+            fetchCurrentUser()
         }
     }
 
+    private fun fetchCurrentUser() {
+
+        val firebaseUser = auth.currentUser
+        val uid = firebaseUser?.uid
+
+        val firestore = FirebaseFirestore.getInstance()
+        if (uid != null) {
+            firestore.collection("users").document(uid).addSnapshotListener {
+                    snapshot, e ->
+                if (e != null) {
+                    Log.w("Listen failed", e)
+                    return@addSnapshotListener
+                }
+                snapshot?.let {
+                    var currentUser = User()
+                    val document = snapshot
+                    val user = document.toObject(User::class.java)
+                    user?.let {
+                        currentUser = user
+                    }
+                    _user.value = currentUser
+                }
+            }
+        }
+
+    }
     private fun listenForRequests() {
         val firestore = FirebaseFirestore.getInstance()
         firestore.collection("requests").addSnapshotListener {
@@ -47,7 +74,7 @@ class FirebaseService {
         }
     }
 
-    fun listenForUserRooms() {
+    private fun listenForUserRooms() {
         val firestore = FirebaseFirestore.getInstance()
         val firebaseUser = auth.currentUser
         val uid = firebaseUser?.uid
@@ -169,6 +196,20 @@ class FirebaseService {
         }
     }
 
+    fun save(user: User) {
+        val firestore = FirebaseFirestore.getInstance()
+        val document = if (user.uid.isEmpty()) {
+            //add
+            firestore.collection("users").document()
+        } else {
+            //update
+            firestore.collection("users").document(user.uid)
+        }
+        val handle = document.set(user)
+        handle.addOnSuccessListener { Log.d("Firebase", "Document Saved") }
+        handle.addOnFailureListener { Log.e("Firebase", "Save failed $it ")}
+    }
+
     fun createUser() {
         val firebaseUser = auth.currentUser
         val uid = firebaseUser?.uid
@@ -241,4 +282,8 @@ class FirebaseService {
     internal var userRoom:UserRoom
         get() { return _userRoom}
         set(value) {_userRoom = value}
+
+    internal var currentUser:MutableLiveData<User>
+        get() { return _user}
+        set(value) {_user = value}
 }

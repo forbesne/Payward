@@ -3,7 +3,6 @@ package com.payward.mobile
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.payward.mobile.dto.Request
-import com.payward.mobile.dto.Response
 import com.payward.mobile.dto.User
 import com.payward.mobile.dto.UserRoom
 import com.payward.mobile.service.FirebaseService
@@ -12,7 +11,7 @@ import com.payward.mobile.service.RequestService
 class MainViewModel : ViewModel() {
     var testRequests: MutableLiveData<ArrayList<Request>> = MutableLiveData<ArrayList<Request>>()
     var requestService: RequestService = RequestService()
-    var firebaseService: FirebaseService = FirebaseService()
+    private var firebaseService: FirebaseService = FirebaseService()
 
     fun fetchRequests(requestId: String) {
         testRequests = requestService.fetchRequests(requestId)
@@ -26,8 +25,8 @@ class MainViewModel : ViewModel() {
         firebaseService.save(request)
     }
 
-    fun save(response: Response) {
-        firebaseService.save(response)
+    fun save(user: User) {
+        firebaseService.save(user)
     }
 
     fun respond(request: Request) {
@@ -36,10 +35,6 @@ class MainViewModel : ViewModel() {
 
     fun createUser() {
         firebaseService.createUser()
-    }
-
-    fun transferPoints(toUid: String, points: Int) {
-        firebaseService.transferPoints(toUid, points)
     }
 
     fun acceptHelp(request: Request, toUid: String) {
@@ -72,4 +67,7 @@ class MainViewModel : ViewModel() {
         get() { return firebaseService.userRoom}
         set(value) {firebaseService.userRoom = value}
 
+    internal var currentUser:MutableLiveData<User>
+        get() { return firebaseService.currentUser}
+        set(value) {firebaseService.currentUser = value}
 }

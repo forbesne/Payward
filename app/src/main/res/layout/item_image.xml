@@ -25,6 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
+                    android:id="@+id/txtName"
                     android:layout_marginTop="15dp"
                     android:text="Addison Fleming"
                     android:textSize="20sp"
@@ -54,6 +55,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <TextView
+                        android:id="@+id/txtHelped"
                         android:layout_weight="1"
                         android:text="Helped"
                         android:gravity="center"
@@ -67,6 +69,7 @@
                         android:layout_width="1dp"
                         android:layout_height="match_parent"/>
                     <TextView
+                        android:id="@+id/txtPoints"
                         android:layout_weight="1"
                         android:text="Points"
                         android:gravity="center"
