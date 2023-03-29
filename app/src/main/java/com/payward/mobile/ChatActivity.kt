@@ -82,6 +82,9 @@ class ChatActivity : AppCompatActivity() {
                 .setCancelable(false)
                 .setPositiveButton("Yes") { dialog, id ->
                     viewModel.acceptHelp(request, toUid)
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
                 .setNegativeButton("No") { dialog, id ->
                     // Dismiss the dialog
@@ -89,10 +92,6 @@ class ChatActivity : AppCompatActivity() {
                 }
             val alert = builder.create()
             alert.show()
-
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
 
         }
 

@@ -44,6 +44,7 @@ class MessageActivity : AppCompatActivity() {
             rvUserRooms.adapter!!.notifyDataSetChanged()
         }
 
+        title = "Messages"
     }
 
     inner class UserRoomsAdapter(val userRooms: ArrayList<UserRoom>, val item: Int) : RecyclerView.Adapter<MessageActivity.UserRoomViewHolder>() {
