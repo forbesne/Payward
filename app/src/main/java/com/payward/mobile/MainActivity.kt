@@ -62,8 +62,15 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-        var btnCharity = findViewById<Button>(R.id.charityBtn)
-        btnCharity.setOnClickListener {
+        var btnMaps = findViewById<Button>(R.id.mapsBtn)
+        btnMaps.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        var btnMessages = findViewById<Button>(R.id.messagesBtn)
+        btnMessages.setOnClickListener {
             val intent = Intent(this, MessageActivity::class.java)
             startActivity(intent)
             finish()

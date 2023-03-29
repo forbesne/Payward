@@ -9,9 +9,16 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+    <Button
+        android:id="@+id/homeBtn"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back_arrow" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
@@ -46,7 +53,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Type a message"
+            android:hint="@string/type_a_message"
             android:inputType="text"
             android:paddingStart="8dp"
             android:textColor="@color/black" />
@@ -56,12 +63,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/btnSend"
             android:text="Send"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/homeBtn"
-            android:background="@drawable/home"/>
     </LinearLayout>
 
 </LinearLayout>
