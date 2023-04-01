@@ -22,6 +22,8 @@
         <item>Pets</item>
         <item>Furniture Assembly</item>
         <item>Home Repairs</item>
+        <item>Hungry</item>
+        <item>Technology</item>
     </string-array>
     <string name="miles">in miles...</string>
 </resources>

@@ -54,6 +54,45 @@ class ProfileActivity : AppCompatActivity() {
             finish()
         }
 
+//        var btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
+//        btnHelpRequest.setOnClickListener {
+//            currentUser.address = txtAddress.text.toString()
+//            currentUser.mobileNumber = txtMobileNumber.text.toString()
+//            viewModel.save(currentUser)
+//            val intent = Intent(this, RequestActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
+//
+//        var btnMaps = findViewById<Button>(R.id.mapsBtn)
+//        btnMaps.setOnClickListener {
+//            currentUser.address = txtAddress.text.toString()
+//            currentUser.mobileNumber = txtMobileNumber.text.toString()
+//            viewModel.save(currentUser)
+//            val intent = Intent(this, MapsActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
+//
+//        var btnMessages = findViewById<Button>(R.id.messagesBtn)
+//        btnMessages.setOnClickListener {
+//            currentUser.address = txtAddress.text.toString()
+//            currentUser.mobileNumber = txtMobileNumber.text.toString()
+//            viewModel.save(currentUser)
+//            val intent = Intent(this, MessageActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
+//
+//        var btnProfile = findViewById<Button>(R.id.btnProfile)
+//        btnProfile.setOnClickListener {
+//            currentUser.address = txtAddress.text.toString()
+//            currentUser.mobileNumber = txtMobileNumber.text.toString()
+//            viewModel.save(currentUser)
+//            val intent = Intent(this, ProfileActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
         logoutBtn = findViewById(R.id.logout_btn)
 
         logoutBtn.setOnClickListener{

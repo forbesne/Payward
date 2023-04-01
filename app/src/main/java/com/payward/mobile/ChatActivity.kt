@@ -105,9 +105,37 @@ class ChatActivity : AppCompatActivity() {
             findViewById<EditText>(R.id.etMessage).text.clear()
         }
 
-        val homeBtn = findViewById<Button>(R.id.homeBtn)
-        homeBtn.setOnClickListener {
+        var btnHome = findViewById<Button>(R.id.homeBtn)
+        btnHome.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        var btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
+        btnHelpRequest.setOnClickListener {
+            val intent = Intent(this, RequestActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        var btnMaps = findViewById<Button>(R.id.mapsBtn)
+        btnMaps.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        var btnMessages = findViewById<Button>(R.id.messagesBtn)
+        btnMessages.setOnClickListener {
+            val intent = Intent(this, MessageActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        var btnProfile = findViewById<Button>(R.id.btnProfile)
+        btnProfile.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
             finish()
         }
