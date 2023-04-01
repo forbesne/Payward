@@ -1,67 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/pastel_green"
+    android:background="@color/light_cyan"
     tools:context=".ProfileActivity">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp">
-
-            <LinearLayout
-                android:padding="8dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <Button
-                        android:id="@+id/homeBtn"
-                        android:layout_width="43dp"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/back_arrow" />
-
-
-
-                    <ImageView
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:padding="1dp"
-                        android:src="@drawable/ic_notification" />
-
-                </RelativeLayout>
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:text="Profile"
-                    android:textStyle="bold"
-                    android:textColor="@color/grey"
-                    android:textSize="33sp"
-                    android:layout_marginStart="15dp"
-                    android:paddingLeft="18dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-
-            </LinearLayout>
+            android:paddingTop="50dp"
+            android:gravity="center">
 
             <include
                 android:layout_gravity="center"
@@ -85,12 +36,84 @@
 
             <Button
                 android:id="@+id/logout_btn"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/filter_button"
+                android:fontFamily="@font/gilgon"
                 android:text="Log Out" />
 
 
         </LinearLayout>
 
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="640dp"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="800dp"
+        app:cardCornerRadius="20dp">
 
-</LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <Button
+                android:id="@+id/homeBtn"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/home"
+                android:contentDescription="@string/app_name"  />
+            <!-- android:textAppearance="" -->
+
+            <Button
+                android:id="@+id/helpRequestBtn"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="42dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/help"
+                android:contentDescription="@string/app_name"
+                style="?android:attr/buttonBarButtonStyle" />
+
+            <Button
+                android:id="@+id/mapsBtn"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="42dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/maps"
+                android:contentDescription="@string/app_name"
+                style="?android:attr/buttonBarButtonStyle" />
+
+            <Button
+                android:id="@+id/messagesBtn"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="42dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/messages"
+                android:contentDescription="@string/app_name"
+                style="?android:attr/buttonBarButtonStyle" />
+
+            <Button
+                android:id="@+id/btnProfile"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="42dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/account"
+                android:contentDescription="@string/app_name"
+                style="?android:attr/buttonBarButtonStyle" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
