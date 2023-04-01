@@ -199,7 +199,7 @@ class MainActivity : AppCompatActivity() {
                         if (request.rqStatus == "open") {
                             if (categorySelected == "All Categories") {
                                 if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
-                                    val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.29345029085822, -84.45687723750659)
+                                    val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.13447904988019, -84.51552473741883)
                                     if (milesDistance < filterMiles) {
                                         filteredList.add(request)
                                     }
@@ -208,7 +208,7 @@ class MainActivity : AppCompatActivity() {
                             }
                             if (categorySelected == request.issueType) {
                                 if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
-                                    val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.29345029085822, -84.45687723750659)
+                                    val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.13447904988019, -84.51552473741883)
                                     if (milesDistance < filterMiles) {
                                         filteredList.add(request)
                                     }
