@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RequestActivity">
-
+    tools:context=".RequestActivity"
+    android:background="@color/light_cyan">
 
     <LinearLayout
         android:layout_width="409dp"
@@ -14,7 +14,6 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp"
         android:padding="20dp"
-        android:background="@color/light_cyan"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -37,101 +36,144 @@
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="10dp">
 
-            <TextView
-                android:id="@+id/textView4"
-                android:labelFor="@id/txtPoints"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
-                android:paddingTop="100dp"
-                android:layout_marginTop="90dp"
-                android:text="Points:"
-                android:textColor="@color/light_cyan"
-                android:textStyle="bold"
-                android:fontFamily="@font/fortune_city"
-                android:textSize="20dp"/>
-
-            <EditText
-                android:id="@+id/txtPoints"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="215dp"
-                android:ems="10"
-                android:minHeight="48dp"
-                android:text=""
-                android:textColor="@color/black"
-                android:inputType="text"
-                android:autofillHints="" />
-
-
-            <TextView
-            android:id="@+id/textView2"
-            android:labelFor="@id/txtCategory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingTop="20dp"
-            android:text="Issue Category:"
-            android:textColor="@color/light_cyan"
-                android:fontFamily="@font/fortune_city"
-            android:textStyle="bold"
-            android:textSize="20dp"/>
-
-        <EditText
-            android:id="@+id/txtCategory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:ems="10"
-            android:minHeight="48dp"
-            android:text=""
-            android:textColor="@color/black"
-            android:inputType="text"
-            android:autofillHints="" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:labelFor="@id/txtDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:layout_marginTop="90dp"
-            android:text="What do you need help with?"
-            android:textColor="@color/light_cyan"
-            android:fontFamily="@font/fortune_city"
-            android:textStyle="bold"
-            android:textSize="20dp"/>
-
-        <EditText
-            android:id="@+id/txtDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
-            android:ems="10"
-            android:minHeight="48dp"
-            android:text=""
-            android:textColor="@color/black"
-            android:inputType="text"
-            android:autofillHints="" />
-
             <LinearLayout
-                android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:padding="15dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="20dp">
 
-                <Button
-                    android:id="@+id/btnSubmit"
-                    android:layout_width="150dp"
+                <view
+                    class="androidx.appcompat.widget.ActionBarContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:text="Issue Category:"
+                        android:textColor="@color/light_cyan"
+                        android:fontFamily="@font/fortune_city"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"/>
+                </view>
+
+
+                <view
+                    class="androidx.appcompat.widget.ActionBarContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center_horizontal">
+                        <TextView
+                            android:id="@+id/txtCategory"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:minHeight="48dp"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:inputType="text"
+                            android:autofillHints="" />
+                        <Spinner
+                            android:id="@+id/spinnerCategories"
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            android:contextClickable="true"
+                            android:textColor="@color/black"
+                            android:theme="@style/Spinner"
+                            android:background="@drawable/baseline_arrow_drop_down_24"/>
+
+
+                    </LinearLayout>
+                </view>
+
+
+
+
+                <view
+                    class="androidx.appcompat.widget.ActionBarContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="240dp"
-                    android:background="@color/light_cyan"
-                    android:fontFamily="@font/gilgon"
-                    android:text="@string/submit"
-                    tools:ignore="TextContrastCheck" />
+                    android:paddingLeft="20dp"
+                    android:text="What do you need help with?"
+                    android:textColor="@color/light_cyan"
+                    android:fontFamily="@font/fortune_city"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_weight="1" android:layout_gravity="center_vertical"/>
+                </view>
+
+                <EditText
+                    android:id="@+id/txtDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:ems="10"
+                    android:minHeight="48dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:inputType="text"
+                    android:autofillHints=""
+                    android:layout_weight="1"/>
+
+                <view
+                    class="androidx.appcompat.widget.ActionBarContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:text="Points:"
+                    android:textColor="@color/light_cyan"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/fortune_city"
+                    android:textSize="20dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"/>
+                </view>
+
+                <EditText
+                    android:id="@+id/txtPoints"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:ems="10"
+                    android:minHeight="48dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:inputType="text"
+                    android:autofillHints=""
+                    android:layout_weight="1"/>
+
+                <LinearLayout
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/btnSubmit"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:background="@color/light_cyan"
+                        android:fontFamily="@font/gilgon"
+                        android:text="@string/submit"
+                        tools:ignore="TextContrastCheck" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -139,73 +181,8 @@
 
     </LinearLayout>
 
-    <androidx.cardview.widget.CardView
-        android:layout_marginTop="640dp"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginEnd="800dp"
-        app:cardCornerRadius="20dp">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white">
-
-            <Button
-                android:id="@+id/homeBtn"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/home"
-                android:contentDescription="@string/app_name"  />
-            <!-- android:textAppearance="" -->
-
-            <Button
-                android:id="@+id/helpRequestBtn"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:layout_marginStart="42dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/help"
-                android:contentDescription="@string/app_name"
-                style="?android:attr/buttonBarButtonStyle" />
-
-            <Button
-                android:id="@+id/mapsBtn"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:layout_marginStart="42dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/maps"
-                android:contentDescription="@string/app_name"
-                style="?android:attr/buttonBarButtonStyle" />
-
-            <Button
-                android:id="@+id/messagesBtn"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:layout_marginStart="42dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/messages"
-                android:contentDescription="@string/app_name"
-                style="?android:attr/buttonBarButtonStyle" />
-
-            <Button
-                android:id="@+id/btnProfile"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:layout_marginStart="42dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/account"
-                android:contentDescription="@string/app_name"
-                style="?android:attr/buttonBarButtonStyle" />
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
+    <include
+        layout="@layout/menu"
+        android:padding="30dp"/>
 
 </RelativeLayout>
