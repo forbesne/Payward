@@ -28,10 +28,11 @@
                     android:id="@+id/txtName"
                     android:layout_marginTop="15dp"
                     android:text="Addison Fleming"
-                    android:textSize="20sp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     android:gravity="center"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/light_cyan"
+                    android:fontFamily="@font/gilgon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -54,16 +55,19 @@
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <TextView
                         android:id="@+id/txtHelped"
-                        android:layout_weight="1"
-                        android:text="Helped"
-                        android:gravity="center"
-                        android:textStyle="bold"
-                        android:textSize="14sp"
-                        android:textColor="@color/grey"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/fortune_city"
+                        android:gravity="center"
+                        android:text="Helped"
+                        android:textColor="@color/light_cyan"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
                     <View
                         android:background="#79D6D1D1"
                         android:layout_width="1dp"
@@ -73,43 +77,15 @@
                         android:layout_weight="1"
                         android:text="Points"
                         android:gravity="center"
+                        android:textSize="17sp"
                         android:textStyle="bold"
-                        android:textSize="14sp"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/light_cyan"
+                        android:fontFamily="@font/fortune_city"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"/>
-                    <View
-                        android:background="#79D6D1D1"
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"/>
-                    <TextView
-                        android:layout_weight="1"
-                        android:text="Edit"
-                        android:gravity="center"
-                        android:textStyle="bold"
-                        android:textSize="14sp"
-                        android:textColor="@color/grey"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"/>
-
 
                 </LinearLayout>
-
-
-
             </LinearLayout>
-
-
         </androidx.cardview.widget.CardView>
-
-
     </RelativeLayout>
-    <com.google.android.material.imageview.ShapeableImageView
-        android:src="@drawable/pp"
-        app:shapeAppearanceOverlay="@style/Circular"
-        android:elevation="15dp"
-        android:padding="5dp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="98dp"
-        android:layout_height="98dp"/>
 </RelativeLayout>

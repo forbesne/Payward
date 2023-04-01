@@ -10,6 +10,7 @@
     app:cardUseCompatPadding="true"
     card_view:cardCornerRAdius="5dp"
     app:cardBackgroundColor="@color/white">
+
     <LinearLayout
         android:orientation="vertical"
         android:padding="8dp"
@@ -27,73 +28,49 @@
                 android:layout_height="wrap_content">
                 <ImageView
                     android:padding="5dp"
-                    android:src="@drawable/ic_person"
+                    android:src="@drawable/address"
                     android:layout_width="35dp"
                     android:layout_height="35dp"/>
                 <TextView
                     android:text="Address"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:layout_margin="5dp"
                     android:textStyle="bold|normal"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/light_cyan"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:padding="1dp"
-                android:gravity="center"
-                android:layout_alignParentEnd="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:padding="5dp"
-                    android:src="@drawable/ic_add"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"/>
-                <TextView
-                    android:text="Add Information"
-                    android:textSize="16sp"
-                    android:layout_margin="5dp"
-                    android:textStyle="bold|normal"
-                    android:textColor="@color/grey"
-                    android:layout_width="wrap_content"
+                    android:fontFamily="@font/fortune_city"
                     android:layout_height="wrap_content"/>
 
             </LinearLayout>
-
 
         </RelativeLayout>
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageView
-                app:tint="@color/pastel_green"
-                android:padding="2dp"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/ic_home"
-                android:layout_width="25dp"
-                android:layout_height="25dp"/>
+
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
                     android:text="UC Blue Ash College"
-                    android:textSize="17sp"
-                    android:textColor="@color/grey"
+                    android:textSize="20sp"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/light_cyan"
                     android:textStyle="bold"
                     android:gravity="center"
+                    android:fontFamily="@font/fortune_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <EditText
                     android:id="@+id/txtAddress"
                     android:text="9555 Plainfield Rd, \nBlue Ash, \nOH 45236, \nUnited States"
-                    android:textSize="13sp"
-                    android:textColor="@color/grey"
+                    android:textSize="18sp"
+                    android:textColor="@color/light_cyan"
+                    android:fontFamily="@font/harabara"
                     android:textStyle="normal"
                     android:textAlignment="textStart"
                     android:layout_width="wrap_content"

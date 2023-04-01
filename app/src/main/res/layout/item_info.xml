@@ -21,18 +21,19 @@
             android:layout_height="wrap_content">
             <ImageView
                 android:padding="2dp"
-                android:src="@drawable/ic_phone"
+                android:src="@drawable/phone"
                 android:layout_marginStart="5dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
             <TextView
                 android:text="Mobile"
                 android:layout_marginStart="10dp"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_gravity="center"
-                android:textColor="@color/grey"
+                android:textColor="@color/light_cyan"
                 android:layout_width="wrap_content"
+                android:fontFamily="@font/fortune_city"
                 android:layout_height="wrap_content"/>
 
 
@@ -41,7 +42,7 @@
             android:id="@+id/txtMobileNumber"
             android:text="+1 612757****"
             android:textStyle="bold"
-            android:textColor="@color/grey"
+            android:textColor="@color/light_cyan"
             android:textSize="18sp"
             android:layout_marginStart="25dp"
             android:layout_marginBottom="15dp"

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -30,6 +31,41 @@ class MessageActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         viewModel.initializeFirebase()
+
+        var btnHome = findViewById<Button>(R.id.homeBtn)
+        btnHome.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        var btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
+        btnHelpRequest.setOnClickListener {
+            val intent = Intent(this, RequestActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        var btnMaps = findViewById<Button>(R.id.mapsBtn)
+        btnMaps.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        var btnMessages = findViewById<Button>(R.id.messagesBtn)
+        btnMessages.setOnClickListener {
+            val intent = Intent(this, MessageActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        var btnProfile = findViewById<Button>(R.id.btnProfile)
+        btnProfile.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         val rvUserRooms = findViewById<RecyclerView>(R.id.list_view)
         rvUserRooms.hasFixedSize()

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/black"
+            android:paddingLeft="15dp"
             android:text="TextView" />
 
         <Button
@@ -37,8 +38,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
+        android:layout_marginTop="70dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="500dp"
         android:layout_weight="1"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
@@ -47,6 +49,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/white"
+        android:layout_marginTop="570dp"
         android:padding="10dp">
 
         <EditText
@@ -54,7 +57,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Type a message"
+            android:hint="@string/type_a_message"
+            android:textColorHint="@color/light_cyan"
             android:inputType="text"
             android:paddingStart="8dp"
             android:textColor="@color/black" />
@@ -68,11 +72,76 @@
             app:srcCompat="@drawable/baseline_send_24"
             android:background="@drawable/baseline_send_24"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/homeBtn"
-            android:background="@drawable/home"/>
     </LinearLayout>
 
-</LinearLayout>
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="640dp"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="800dp"
+        app:cardCornerRadius="20dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <Button
+                android:id="@+id/homeBtn"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/home"
+                android:contentDescription="@string/app_name"  />
+            <!-- android:textAppearance="" -->
+
+            <Button
+                android:id="@+id/helpRequestBtn"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="42dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/help"
+                android:contentDescription="@string/app_name"
+                style="?android:attr/buttonBarButtonStyle" />
+
+            <Button
+                android:id="@+id/mapsBtn"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="42dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/maps"
+                android:contentDescription="@string/app_name"
+                style="?android:attr/buttonBarButtonStyle" />
+
+            <Button
+                android:id="@+id/messagesBtn"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="42dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/messages"
+                android:contentDescription="@string/app_name"
+                style="?android:attr/buttonBarButtonStyle" />
+
+            <Button
+                android:id="@+id/btnProfile"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="42dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/account"
+                android:contentDescription="@string/app_name"
+                style="?android:attr/buttonBarButtonStyle" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
