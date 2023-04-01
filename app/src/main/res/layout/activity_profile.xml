@@ -24,9 +24,9 @@
 
                     <Button
                         android:id="@+id/homeBtn"
-                        android:layout_width="wrap_content"
+                        android:layout_width="43dp"
                         android:layout_height="match_parent"
-                        android:background="@drawable/home" />
+                        android:background="@drawable/back_arrow" />
 
 
 

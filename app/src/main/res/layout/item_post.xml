@@ -48,8 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="11dp">
+            android:layout_marginStart="90dp"
+            android:layout_marginTop="13dp">
 
             <Button
                 android:id="@+id/btnRespond"
@@ -82,7 +82,7 @@
             android:textColor="@color/black"
             android:padding="15dp"
             android:text="@string/textview2"
-            tools:text="Car Issues" />
+            tools:text="Distance" />
 
         <TextView
             android:id="@+id/txtCategory"
@@ -92,7 +92,7 @@
             android:textColor="@color/black"
             android:padding="15dp"
             android:text="@string/textview2"
-            tools:text="Car Issues" />
+            tools:text="Category" />
 
         <TextView
             android:id="@+id/description"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,21 +11,60 @@
         android:layout_width="409dp"
         android:layout_height="729dp"
         android:orientation="vertical"
-        android:gravity="center"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp"
         android:padding="20dp"
-        android:background="@color/pastel_green"
+        android:background="@color/light_cyan"
         tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/textView0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="70dp"
+            android:paddingBottom="60dp"
+            android:text="Help Request Form"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:fontFamily="@font/gilgon"
+            android:textSize="25dp"/>
 
         <androidx.cardview.widget.CardView
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="350dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="10dp">
 
-        <TextView
+            <TextView
+                android:id="@+id/textView4"
+                android:labelFor="@id/txtPoints"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingTop="100dp"
+                android:layout_marginTop="90dp"
+                android:text="Points:"
+                android:textColor="@color/light_cyan"
+                android:textStyle="bold"
+                android:fontFamily="@font/fortune_city"
+                android:textSize="20dp"/>
+
+            <EditText
+                android:id="@+id/txtPoints"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="215dp"
+                android:ems="10"
+                android:minHeight="48dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:inputType="text"
+                android:autofillHints="" />
+
+
+            <TextView
             android:id="@+id/textView2"
             android:labelFor="@id/txtCategory"
             android:layout_width="match_parent"
@@ -33,9 +72,10 @@
             android:paddingLeft="20dp"
             android:paddingTop="20dp"
             android:text="Issue Category:"
-            android:textColor="#5A595B"
+            android:textColor="@color/light_cyan"
+                android:fontFamily="@font/fortune_city"
             android:textStyle="bold"
-            android:textSize="17dp"/>
+            android:textSize="20dp"/>
 
         <EditText
             android:id="@+id/txtCategory"
@@ -58,9 +98,10 @@
             android:paddingTop="10dp"
             android:layout_marginTop="90dp"
             android:text="What do you need help with?"
-            android:textColor="#5A595B"
+            android:textColor="@color/light_cyan"
+            android:fontFamily="@font/fortune_city"
             android:textStyle="bold"
-            android:textSize="17dp"/>
+            android:textSize="20dp"/>
 
         <EditText
             android:id="@+id/txtDescription"
@@ -84,10 +125,11 @@
 
                 <Button
                     android:id="@+id/btnSubmit"
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="150dp"
-                    android:background="#5A595B"
+                    android:layout_marginTop="240dp"
+                    android:background="@color/light_cyan"
+                    android:fontFamily="@font/gilgon"
                     android:text="@string/submit"
                     tools:ignore="TextContrastCheck" />
 
@@ -95,66 +137,75 @@
 
         </androidx.cardview.widget.CardView>
 
-        <EditText
-            android:id="@+id/txtPoints"
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="640dp"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="800dp"
+        app:cardCornerRadius="20dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:minHeight="48dp"
-            android:textColor="#5A595B"
-            android:text="Points:" />
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/homeBtn"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/home"
+                android:contentDescription="@string/app_name"  />
+            <!-- android:textAppearance="" -->
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="650dp"
-        android:background="#5A595B">
+            <Button
+                android:id="@+id/helpRequestBtn"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="42dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/help"
+                android:contentDescription="@string/app_name"
+                style="?android:attr/buttonBarButtonStyle" />
 
-        <Button
-            android:id="@+id/homeBtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="42dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/home"
-            android:contentDescription="@string/app_name"
-            style="?android:attr/buttonBarButtonStyle" />
-        <!-- android:textAppearance="" -->
+            <Button
+                android:id="@+id/mapsBtn"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="42dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/maps"
+                android:contentDescription="@string/app_name"
+                style="?android:attr/buttonBarButtonStyle" />
 
-        <Button
-            android:id="@+id/helpRequestBtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="42dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/help"
-            android:contentDescription="@string/app_name"
-            style="?android:attr/buttonBarButtonStyle" />
+            <Button
+                android:id="@+id/messagesBtn"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="42dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/messages"
+                android:contentDescription="@string/app_name"
+                style="?android:attr/buttonBarButtonStyle" />
 
-        <Button
-            android:id="@+id/charityBtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="42dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/charity"
-            android:contentDescription="@string/app_name"
-            style="?android:attr/buttonBarButtonStyle" />
+            <Button
+                android:id="@+id/btnProfile"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="42dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/account"
+                android:contentDescription="@string/app_name"
+                style="?android:attr/buttonBarButtonStyle" />
 
-        <Button
-            android:id="@+id/btnLogon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="42dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/account"
-            android:contentDescription="@string/app_name"
-            style="?android:attr/buttonBarButtonStyle" />
+        </LinearLayout>
 
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
