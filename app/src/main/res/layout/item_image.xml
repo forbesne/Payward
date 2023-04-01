@@ -6,115 +6,83 @@
     xmlns:card_view="http://schemas.android.com/tools"
     android:layout_centerInParent="true"
     android:gravity="center">
-
     <RelativeLayout
+        android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_centerInParent="true">
-
+        android:layout_height="250dp">
         <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="210dp"
-            android:layout_marginTop="0dp"
-            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="15dp"
+            android:layout_marginTop="40dp"
             app:cardElevation="10dp"
             app:cardUseCompatPadding="true"
-            card_view:cardCornerRAdius="5dp">
-
+            card_view:cardCornerRAdius="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            app:cardBackgroundColor="@color/white">
             <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="23dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="2dp"
-                android:orientation="vertical">
-
+                android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/txtName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:fontFamily="@font/gilgon"
-                    android:gravity="center"
                     android:text="Addison Fleming"
-                    android:textColor="@color/light_cyan"
                     android:textSize="24sp"
-                    android:textStyle="bold" />
-
-                <TextView
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="@color/light_cyan"
+                    android:fontFamily="@font/gilgon"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
                     android:layout_marginTop="2dp"
+                    android:text=""
+                    android:textSize="13sp"
+                    android:textStyle="normal"
                     android:layout_marginBottom="10dp"
                     android:gravity="center"
-                    android:text=""
                     android:textColor="#5C5A5A"
-                    android:textSize="13sp"
-                    android:textStyle="normal" />
-
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
                 <View
+                    android:background="#79D6D1D1"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#79D6D1D1" />
-
+                    android:layout_height="1dp"/>
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
                     android:orientation="horizontal"
-                    android:weightSum="3">
+                    android:weightSum="3"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/helpedlbl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:textColor="@color/light_cyan"
-                        android:fontFamily="@font/fortune_city"
-                        android:textStyle="bold"
-                        android:textSize="18dp"
-                        android:text="Helped :" />
-
-                    <TextView
-                        android:id="@+id/textHelped"
+                        android:id="@+id/txtHelped"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/fortune_city"
                         android:gravity="center"
-                        android:text="helped"
+                        android:text="Helped"
                         android:textColor="@color/light_cyan"
                         android:textSize="17sp"
                         android:textStyle="bold" />
 
                     <View
+                        android:background="#79D6D1D1"
                         android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#79D6D1D1" />
-
-                    <TextView
-                        android:id="@+id/pointslbl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:textColor="@color/light_cyan"
-                        android:fontFamily="@font/fortune_city"
-                        android:layout_marginLeft="10dp"
-                        android:textStyle="bold"
-                        android:textSize="18dp"
-                        android:text="Points :" />
-
+                        android:layout_height="match_parent"/>
                     <TextView
                         android:id="@+id/txtPoints"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/fortune_city"
+                        android:text="Points"
                         android:gravity="center"
-                        android:text="points"
-                        android:textColor="@color/light_cyan"
                         android:textSize="17sp"
-                        android:textStyle="bold" />
-
+                        android:textStyle="bold"
+                        android:textColor="@color/light_cyan"
+                        android:fontFamily="@font/fortune_city"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
 
                 </LinearLayout>
             </LinearLayout>

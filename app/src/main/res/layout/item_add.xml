@@ -55,6 +55,16 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <TextView
+                    android:text="UC Blue Ash College"
+                    android:textSize="20sp"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/light_cyan"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:fontFamily="@font/fortune_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
                 <EditText
                     android:id="@+id/txtAddress"
                     android:text="9555 Plainfield Rd, \nBlue Ash, \nOH 45236, \nUnited States"
