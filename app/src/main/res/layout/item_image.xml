@@ -75,7 +75,7 @@
                         android:text="Helped :" />
 
                     <TextView
-                        android:id="@+id/textHelped"
+                        android:id="@+id/txtHelped"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

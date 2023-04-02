@@ -204,7 +204,7 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener, OnMap
 
                 if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
                     val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.13447904988019, -84.51552473741883)
-                    lblDistance.text = "Distance: " + milesDistance.toString() + " miles"
+                    lblDistance.text = milesDistance.toString() + " miles"
                 } else {
                     lblDistance.text = "Location not provided"
                 }
