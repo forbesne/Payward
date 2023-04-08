@@ -31,7 +31,7 @@ class RequestActivity : AppCompatActivity() {
         btnSubmit = findViewById(R.id.btnSubmit)
         btnSubmit.setOnClickListener {
             var request = Request()
-            request.issueType = categorySelected
+            request.issueType = findViewById<AutoCompleteTextView>(R.id.txtCategory).text.toString()
             request.text = findViewById<EditText>(R.id.txtDescription).text.toString()
             request.helpingPoints = findViewById<EditText>(R.id.txtPoints).text.toString().toInt()
             request.latitude = locationDetails.latitude
@@ -44,34 +44,34 @@ class RequestActivity : AppCompatActivity() {
 
         val categoryList = resources.getStringArray(R.array.categories_array)
 
-        val spinner: Spinner = findViewById(R.id.spinnerCategories)
-// Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.categories_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            spinner.adapter = adapter
-        }
-
-        spinner.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                categorySelected = categoryList[position]
-                val txtCategory: TextView = findViewById(R.id.txtCategory)
-                txtCategory.text = categorySelected
-//                Toast.makeText(this@MainActivity,
-//                    " " +
-//                            "" + categoryList[position], Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // write code to perform some action
-            }
-        }
+//        val spinner: Spinner = findViewById(R.id.spinnerCategories)
+//// Create an ArrayAdapter using the string array and a default spinner layout
+//        ArrayAdapter.createFromResource(
+//            this,
+//            R.array.categories_array,
+//            android.R.layout.simple_spinner_item
+//        ).also { adapter ->
+//            // Specify the layout to use when the list of choices appears
+//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//            // Apply the adapter to the spinner
+//            spinner.adapter = adapter
+//        }
+//
+//        spinner.onItemSelectedListener = object :
+//            AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+//                categorySelected = categoryList[position]
+//                val txtCategory: TextView = findViewById(R.id.txtCategory)
+//                txtCategory.text = categorySelected
+////                Toast.makeText(this@MainActivity,
+////                    " " +
+////                            "" + categoryList[position], Toast.LENGTH_SHORT).show()
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>) {
+//                // write code to perform some action
+//            }
+//        }
 
         var btnHome = findViewById<Button>(R.id.homeBtn)
         btnHome.setOnClickListener {

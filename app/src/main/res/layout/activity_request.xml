@@ -42,57 +42,75 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
-                <view
-                    class="androidx.appcompat.widget.ActionBarContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="20dp"
-                        android:text="Issue Category:"
-                        android:textColor="@color/light_cyan"
-                        android:fontFamily="@font/fortune_city"
-                        android:textStyle="bold"
-                        android:textSize="20dp"
-                        android:layout_weight="1"
-                        android:layout_gravity="center_vertical"/>
-                </view>
+<!--                <view-->
+<!--                    class="androidx.appcompat.widget.ActionBarContainer"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="0dp"-->
+<!--                    android:layout_weight="1">-->
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:paddingLeft="20dp"-->
+<!--                        android:text="Issue Category:"-->
+<!--                        android:textColor="@color/light_cyan"-->
+<!--                        android:fontFamily="@font/fortune_city"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:textSize="20dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:layout_gravity="center_vertical"/>-->
+<!--                </view>-->
 
 
-                <view
-                    class="androidx.appcompat.widget.ActionBarContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-                    <LinearLayout
+<!--                <view-->
+<!--                    class="androidx.appcompat.widget.ActionBarContainer"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="0dp"-->
+<!--                    android:layout_weight="1">-->
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/menu2"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|center_horizontal">
-                        <TextView
+                        android:hint="Category">
+
+                        <AutoCompleteTextView
                             android:id="@+id/txtCategory"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:ems="10"
-                            android:minHeight="48dp"
-                            android:text=""
-                            android:textColor="@color/black"
-                            android:inputType="text"
-                            android:autofillHints="" />
-                        <Spinner
-                            android:id="@+id/spinnerCategories"
-                            android:layout_width="50dp"
-                            android:layout_height="match_parent"
-                            android:contextClickable="true"
-                            android:textColor="@color/black"
-                            android:theme="@style/Spinner"
-                            android:background="@drawable/baseline_arrow_drop_down_24"/>
+                            android:inputType="none"
+                            app:simpleItems="@array/categories_array"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical|center_horizontal">-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/txtCategory"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:ems="10"-->
+<!--                            android:minHeight="48dp"-->
+<!--                            android:text=""-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:inputType="text"-->
+<!--                            android:autofillHints="" />-->
+<!--                        <Spinner-->
+<!--                            android:id="@+id/spinnerCategories"-->
+<!--                            android:layout_width="50dp"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:contextClickable="true"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:theme="@style/Spinner"-->
+<!--                            android:background="@drawable/baseline_arrow_drop_down_24"/>-->
 
 
-                    </LinearLayout>
-                </view>
+<!--                    </LinearLayout>-->
+<!--                </view>-->
 
 
 

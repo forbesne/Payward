@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categories_array">
+        <item>All Categories</item>
+        <item>Car Issues</item>
+        <item>Children</item>
+        <item>Pets</item>
+        <item>Furniture Assembly</item>
+        <item>Home Repairs</item>
+        <item>Hungry</item>
+        <item>Technology</item>
+    </string-array>
+</resources>

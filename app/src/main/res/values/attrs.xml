@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="color" format="color" />
+    <attr name="colorOn" format="color" />
+    <attr name="colorContainer" format="color" />
+    <attr name="colorOnContainer" format="color" />
+    <attr name="harmonize" format="boolean" />
+</resources>

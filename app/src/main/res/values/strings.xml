@@ -15,15 +15,6 @@
     <string name="helpRequest">Help Request Form</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="type_a_message">Type a message</string>
-    <string-array name="categories_array">
-        <item>All Categories</item>
-        <item>Car Issues</item>
-        <item>Children</item>
-        <item>Pets</item>
-        <item>Furniture Assembly</item>
-        <item>Home Repairs</item>
-        <item>Hungry</item>
-        <item>Technology</item>
-    </string-array>
+
     <string name="miles">in miles...</string>
 </resources>

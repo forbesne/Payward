@@ -12,85 +12,53 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:orientation="horizontal"
-        android:padding="20dp">
-        <view
-            class="androidx.appcompat.widget.ActionBarContainer"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+        android:orientation="horizontal">
 
             <Button
+                style="@style/Widget.App.Button.OutlinedButton.IconOnly"
                 android:id="@+id/homeBtn"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:background="@drawable/home"
-                android:contentDescription="@string/app_name"
-                android:padding="20dp"
-                android:layout_gravity="center_vertical|center_horizontal"/>
-        </view>
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/home"
+                android:layout_weight="1"
+                />
 
-        <view
-            class="androidx.appcompat.widget.ActionBarContainer"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            <Button
+                style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                android:id="@+id/helpRequestBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/help"
+                android:layout_weight="1"
+                />
 
-        <Button
-            android:id="@+id/helpRequestBtn"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:background="@drawable/help"
-            android:contentDescription="@string/app_name"
-            android:layout_gravity="center_vertical|center_horizontal"/>
-        </view>
+            <Button
+                style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                android:id="@+id/mapsBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/maps"
+                android:layout_weight="1"
+                />
 
-        <view
-            class="androidx.appcompat.widget.ActionBarContainer"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-        <Button
-            android:id="@+id/mapsBtn"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:background="@drawable/maps"
-            android:contentDescription="@string/app_name"
-            android:layout_gravity="center_vertical|center_horizontal"/>
-        </view>
+            <Button
+                style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                android:id="@+id/messagesBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/messages"
+                android:layout_weight="1"
+                />
 
-        <view
-            class="androidx.appcompat.widget.ActionBarContainer"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-        <Button
-            android:id="@+id/messagesBtn"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:background="@drawable/messages"
-            android:contentDescription="@string/app_name"
-            android:layout_gravity="center_vertical|center_horizontal"/>
-        </view>
+            <Button
+                style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                android:id="@+id/btnProfile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/account"
+                android:layout_weight="1"
+                />
 
-        <view
-            class="androidx.appcompat.widget.ActionBarContainer"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-        <Button
-            android:id="@+id/btnProfile"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:background="@drawable/account"
-            android:contentDescription="@string/app_name"
-            android:layout_gravity="center_vertical|center_horizontal"/>
-        </view>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

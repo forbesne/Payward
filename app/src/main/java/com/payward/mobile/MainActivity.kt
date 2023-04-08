@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.payward.mobile.dto.LocationDetails
@@ -94,7 +95,7 @@ class MainActivity : AppCompatActivity() {
         rvRequests.hasFixedSize()
         rvRequests.layoutManager = LinearLayoutManager(applicationContext)
         rvRequests.itemAnimator = DefaultItemAnimator()
-        rvRequests.adapter = RequestsAdapter(requestListFiltered, R.layout.item_post)
+        rvRequests.adapter = RequestsAdapter(requestListFiltered, R.layout.item_request)
 
         viewModel.requests.observeForever {
                 requests ->
@@ -106,41 +107,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         var btnFilter = findViewById<Button>(R.id.filter_btn)
+        var txtCategory = findViewById<AutoCompleteTextView>(R.id.txtCategory)
         btnFilter.setOnClickListener {
+            categorySelected = txtCategory.text.toString()
+            if (categorySelected == "") {
+                categorySelected = "All Categories"
+            }
             (rvRequests.adapter as RequestsAdapter).getFilter().filter("10")
         }
 
-        val categoryList = resources.getStringArray(R.array.categories_array)
-
-        val spinner: Spinner = findViewById(R.id.spinnerCategories)
-// Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.categories_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            spinner.adapter = adapter
-        }
-
-        spinner.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                categorySelected = categoryList[position]
-//                Toast.makeText(this@MainActivity,
-//                    " " +
-//                            "" + categoryList[position], Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // write code to perform some action
-            }
-        }
 
 
-        requestLocationPermissions()
+//        requestLocationPermissions()
     }
 
     private fun requestLocationPermissions() {
@@ -248,7 +226,7 @@ class MainActivity : AppCompatActivity() {
 
             if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
                 val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.29345029085822, -84.45687723750659)
-                lblDistance.text = "Distance: " + milesDistance.toString() + " miles"
+                lblDistance.text = milesDistance.toString() + " miles"
             }
             else {
                 lblDistance.text = "Location not provided"

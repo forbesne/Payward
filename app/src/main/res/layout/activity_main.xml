@@ -5,191 +5,165 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_cyan"
+    android:layout_margin="10dp"
     tools:context=".MainActivity">
-
-    <!-- <LinearLayout
-         android:orientation="horizontal"
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:layout_marginTop="0dp"
-         android:background="@color/pastel_green">-->
-
- <!--    <SearchView-->
-<!--        android:id="@+id/simpleSearchView"-->
-<!--        android:layout_width="290dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="30dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:background="@color/white"/>-->
-
-<!--        <Button-->
-<!--            android:id="@+id/dms"-->
-<!--            android:layout_width="48dp"-->
-<!--            android:layout_height="48dp"-->
-<!--            android:layout_marginStart="12dp"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:background="@drawable/dms"-->
-<!--            android:contentDescription="@string/app_name"-->
-<!--            tools:ignore="DuplicateSpeakableTextCheck" />-->
-
-    <!--</LinearLayout>-->
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:background="@color/light_cyan">
+        android:layout_marginTop="10dp">
 
-        <Spinner
-            android:id="@+id/spinnerCategories"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/menu2"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:hint="Category">
+
+            <AutoCompleteTextView
+                android:id="@+id/txtCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                app:simpleItems="@array/categories_array"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/light_cyan">
+        android:paddingHorizontal="10dp"
+        >
 
         <TextView
             android:id="@+id/textView1"
-            android:labelFor="@id/txtDistance"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="29dp"
-            android:layout_marginRight="15dp"
             android:text="Distance:"
-            android:textColor="@color/white"
             android:textStyle="bold"
-            android:fontFamily="@font/gilgon"
-            android:textSize="17dp"/>
+            android:textSize="17dp"
+            android:layout_weight="1" android:layout_gravity="center_vertical"/>
 
         <EditText
             android:id="@+id/txtDistance"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="5"
             android:minHeight="10dp"
             android:text=""
-            android:textColor="@color/black"
             android:hint="@string/miles"
             android:inputType="text"
-            android:autofillHints="" />
-        
+            android:autofillHints=""
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:paddingRight="30dp"/>
+
+        <view
+            class="androidx.appcompat.widget.ActionBarContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
         <Button
             android:id="@+id/filter_btn"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="30dp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="155dp"
-            android:textStyle="bold"
-            android:background="@drawable/filter_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Filter"
-            android:textColor="@color/white" />
+            android:layout_gravity="center_vertical"/>
         
     </LinearLayout>
-        
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="85dp"
-        android:background="@color/light_cyan">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="360dp"
-            android:layout_height="530dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            app:cardCornerRadius="30dp">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:cardCornerRadius="30dp"
+            android:layout_weight="1"
+            android:padding="20dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvRequests"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:background="@color/white" />
+                android:padding="10dp"/>
 
         </androidx.cardview.widget.CardView>
 
-    </LinearLayout>
-
-    <androidx.cardview.widget.CardView
-        android:layout_marginTop="640dp"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginEnd="800dp"
-        app:cardCornerRadius="20dp">
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
-
-        <Button
-            android:id="@+id/homeBtn"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/home"
-            android:contentDescription="@string/app_name"  />
-        <!-- android:textAppearance="" -->
-
-        <Button
-            android:id="@+id/helpRequestBtn"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:layout_marginStart="42dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/help"
-            android:contentDescription="@string/app_name"
-            style="?android:attr/buttonBarButtonStyle" />
-
-        <Button
-            android:id="@+id/mapsBtn"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:layout_marginStart="42dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/maps"
-            android:contentDescription="@string/app_name"
-            style="?android:attr/buttonBarButtonStyle" />
-
-        <Button
-            android:id="@+id/messagesBtn"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:layout_marginStart="42dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/messages"
-            android:contentDescription="@string/app_name"
-            style="?android:attr/buttonBarButtonStyle" />
-
-        <Button
-            android:id="@+id/btnProfile"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:layout_marginStart="42dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/account"
-            android:contentDescription="@string/app_name"
-            style="?android:attr/buttonBarButtonStyle" />
+        <include
+            layout="@layout/menu"/>
 
     </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_marginTop="640dp"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="80dp"-->
+<!--        android:layout_marginStart="6dp"-->
+<!--        android:layout_marginEnd="800dp"-->
+<!--        app:cardCornerRadius="20dp">-->
+
+<!--    <LinearLayout-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="@color/white">-->
+
+<!--        <Button-->
+<!--            android:id="@+id/homeBtn"-->
+<!--            style="?android:attr/buttonBarButtonStyle"-->
+<!--            android:layout_width="42dp"-->
+<!--            android:layout_height="42dp"-->
+<!--            android:layout_marginStart="18dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:background="@drawable/home"-->
+<!--            android:contentDescription="@string/app_name"  />-->
+<!--        &lt;!&ndash; android:textAppearance="" &ndash;&gt;-->
+
+<!--        <Button-->
+<!--            android:id="@+id/helpRequestBtn"-->
+<!--            android:layout_width="42dp"-->
+<!--            android:layout_height="42dp"-->
+<!--            android:layout_marginStart="42dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:background="@drawable/help"-->
+<!--            android:contentDescription="@string/app_name"-->
+<!--            style="?android:attr/buttonBarButtonStyle" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/mapsBtn"-->
+<!--            android:layout_width="42dp"-->
+<!--            android:layout_height="42dp"-->
+<!--            android:layout_marginStart="42dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:background="@drawable/maps"-->
+<!--            android:contentDescription="@string/app_name"-->
+<!--            style="?android:attr/buttonBarButtonStyle" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/messagesBtn"-->
+<!--            android:layout_width="42dp"-->
+<!--            android:layout_height="42dp"-->
+<!--            android:layout_marginStart="42dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:background="@drawable/messages"-->
+<!--            android:contentDescription="@string/app_name"-->
+<!--            style="?android:attr/buttonBarButtonStyle" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btnProfile"-->
+<!--            android:layout_width="42dp"-->
+<!--            android:layout_height="42dp"-->
+<!--            android:layout_marginStart="42dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:background="@drawable/account"-->
+<!--            android:contentDescription="@string/app_name"-->
+<!--            style="?android:attr/buttonBarButtonStyle" />-->
+
+<!--    </LinearLayout>-->
+
+<!--    </androidx.cardview.widget.CardView>-->
 
 </RelativeLayout>
