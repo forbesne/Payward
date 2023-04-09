@@ -48,6 +48,7 @@
         </activity>
         <activity
             android:name=".ChatActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

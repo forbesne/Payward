@@ -16,8 +16,7 @@
             app:cardUseCompatPadding="true"
             card_view:cardCornerRAdius="5dp"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            app:cardBackgroundColor="@color/white">
+            android:layout_height="200dp">
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_marginTop="28dp"
@@ -30,8 +29,6 @@
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:gravity="center"
-                    android:textColor="@color/light_cyan"
-                    android:fontFamily="@font/gilgon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -41,7 +38,6 @@
                     android:textStyle="normal"
                     android:layout_marginBottom="10dp"
                     android:gravity="center"
-                    android:textColor="#5C5A5A"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <View
@@ -59,10 +55,6 @@
                     android:id="@+id/helpedlbl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:textColor="@color/light_cyan"
-                    android:fontFamily="@font/fortune_city"
-                    android:textStyle="bold"
                     android:textSize="18dp"
                     android:text="Helped :" />
 
@@ -71,12 +63,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/fortune_city"
                         android:gravity="center"
                         android:text="helped"
-                        android:textColor="@color/light_cyan"
-                        android:textSize="17sp"
-                        android:textStyle="bold" />
+                        android:textSize="17sp" />
 
                     <View
                         android:background="#79D6D1D1"
@@ -87,11 +76,7 @@
                         android:id="@+id/pointslbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:textColor="@color/light_cyan"
-                        android:fontFamily="@font/fortune_city"
                         android:layout_marginLeft="10dp"
-                        android:textStyle="bold"
                         android:textSize="18dp"
                         android:text="Points :" />
 
@@ -101,9 +86,6 @@
                         android:text="points"
                         android:gravity="center"
                         android:textSize="17sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/light_cyan"
-                        android:fontFamily="@font/fortune_city"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"/>
 

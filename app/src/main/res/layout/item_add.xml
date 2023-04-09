@@ -8,8 +8,7 @@
     app:cardCornerRadius="15dp"
     app:cardElevation="10dp"
     app:cardUseCompatPadding="true"
-    card_view:cardCornerRAdius="5dp"
-    app:cardBackgroundColor="@color/white">
+    card_view:cardCornerRAdius="5dp">
 
     <LinearLayout
         android:orientation="vertical"
@@ -28,6 +27,7 @@
                 android:layout_height="wrap_content">
                 <ImageView
                     android:padding="5dp"
+                    app:icon="@drawable/baseline_reply_24"
                     android:src="@drawable/address"
                     android:layout_width="35dp"
                     android:layout_height="35dp"/>
@@ -35,10 +35,7 @@
                     android:text="Address"
                     android:textSize="20sp"
                     android:layout_margin="5dp"
-                    android:textStyle="bold|normal"
-                    android:textColor="@color/light_cyan"
                     android:layout_width="wrap_content"
-                    android:fontFamily="@font/fortune_city"
                     android:layout_height="wrap_content"/>
 
             </LinearLayout>
@@ -50,7 +47,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -60,13 +56,10 @@
                     android:id="@+id/txtAddress"
                     android:text="9555 Plainfield Rd, \nBlue Ash, \nOH 45236, \nUnited States"
                     android:textSize="18sp"
-                    android:textColor="@color/light_cyan"
-                    android:fontFamily="@font/harabara"
                     android:textStyle="normal"
                     android:textAlignment="textStart"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    card_view:ignore="RtlCompat" />
+                    android:layout_height="wrap_content" />
 
 
             </LinearLayout>

@@ -11,7 +11,6 @@ tools:context=".MainFragment">
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:background="@color/light_cyan"
         android:padding="25dp"
         android:orientation="vertical">
 
@@ -64,24 +63,20 @@ tools:context=".MainFragment">
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="135dp"
-                    android:background="@color/light_cyan"
                     android:text="LOG IN"
-                    android:textSize="16dp"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    tools:ignore="TextContrastCheck" />
+                    android:textSize="16dp" />
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
         <Button
+            style="@style/Widget.Material3.Button.TextButton"
             android:id="@+id/signup_btn"
-            android:layout_width="236dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@color/white"
-            android:textColor="@color/light_cyan"
-            android:text="Sign up" />
+            android:text="Sign up"
+            />
 
 </LinearLayout>
 

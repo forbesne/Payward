@@ -8,8 +8,7 @@
     app:cardCornerRadius="15dp"
     app:cardElevation="10dp"
     app:cardUseCompatPadding="true"
-    card_view:cardCornerRAdius="5dp"
-    app:cardBackgroundColor="@color/white">
+    card_view:cardCornerRAdius="5dp">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -29,11 +28,8 @@
                 android:text="Mobile"
                 android:layout_marginStart="10dp"
                 android:textSize="20sp"
-                android:textStyle="bold"
                 android:layout_gravity="center"
-                android:textColor="@color/light_cyan"
                 android:layout_width="wrap_content"
-                android:fontFamily="@font/fortune_city"
                 android:layout_height="wrap_content"/>
 
 
@@ -41,8 +37,6 @@
         <EditText
             android:id="@+id/txtMobileNumber"
             android:text="+1 612757****"
-            android:textStyle="bold"
-            android:textColor="@color/light_cyan"
             android:textSize="18sp"
             android:layout_marginStart="25dp"
             android:layout_marginBottom="15dp"

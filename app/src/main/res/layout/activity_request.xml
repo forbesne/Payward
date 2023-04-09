@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RequestActivity"
-    android:background="@color/light_cyan">
+    tools:context=".RequestActivity">
 
     <LinearLayout
         android:layout_width="409dp"
@@ -13,8 +12,7 @@
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp"
-        android:padding="20dp"
-        tools:ignore="MissingConstraints">
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/textView0"
@@ -24,9 +22,6 @@
             android:layout_marginTop="70dp"
             android:paddingBottom="60dp"
             android:text="Help Request Form"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:fontFamily="@font/gilgon"
             android:textSize="25dp"/>
 
         <androidx.cardview.widget.CardView
@@ -125,9 +120,6 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
                     android:text="What do you need help with?"
-                    android:textColor="@color/light_cyan"
-                    android:fontFamily="@font/fortune_city"
-                    android:textStyle="bold"
                     android:textSize="20dp"
                     android:layout_weight="1" android:layout_gravity="center_vertical"/>
                 </view>
@@ -139,7 +131,6 @@
                     android:ems="10"
                     android:minHeight="48dp"
                     android:text=""
-                    android:textColor="@color/black"
                     android:inputType="text"
                     android:autofillHints=""
                     android:layout_weight="1"/>
@@ -154,9 +145,6 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
                     android:text="Points:"
-                    android:textColor="@color/light_cyan"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/fortune_city"
                     android:textSize="20dp"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical"/>
@@ -169,7 +157,6 @@
                     android:ems="10"
                     android:minHeight="48dp"
                     android:text=""
-                    android:textColor="@color/black"
                     android:inputType="text"
                     android:autofillHints=""
                     android:layout_weight="1"/>
@@ -184,12 +171,9 @@
 
                     <Button
                         android:id="@+id/btnSubmit"
-                        android:layout_width="150dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/light_cyan"
-                        android:fontFamily="@font/gilgon"
-                        android:text="@string/submit"
-                        tools:ignore="TextContrastCheck" />
+                        android:text="@string/submit" />
 
                 </LinearLayout>
 
