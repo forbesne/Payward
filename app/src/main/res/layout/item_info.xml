@@ -11,19 +11,24 @@
     card_view:cardCornerRAdius="5dp">
     <LinearLayout
         android:orientation="vertical"
+        android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
             android:orientation="horizontal"
-            android:padding="3dp"
-            android:layout_width="match_parent"
+            android:padding="1dp"
+            android:gravity="center"
+            android:layout_alignParentStart="true"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <ImageView
-                android:padding="2dp"
-                android:src="@drawable/phone"
-                android:layout_marginStart="5dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"/>
+            <Button
+                style="@style/Widget.App.Button.OutlinedButton.IconOnly.Small"
+                android:id="@+id/btnx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/phone"
+                />
+
             <TextView
                 android:text="Mobile"
                 android:layout_marginStart="10dp"

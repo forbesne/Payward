@@ -25,12 +25,16 @@
                 android:layout_alignParentStart="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-                <ImageView
-                    android:padding="5dp"
-                    app:icon="@drawable/baseline_reply_24"
-                    android:src="@drawable/address"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"/>
+
+                <Button
+                    style="@style/Widget.App.Button.OutlinedButton.IconOnly.Small"
+                    android:id="@+id/btny"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/address"
+                    android:layout_weight="1"
+                    />
+
                 <TextView
                     android:text="Address"
                     android:textSize="20sp"
@@ -53,6 +57,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:layout_marginStart="25dp"
                     android:id="@+id/txtAddress"
                     android:text="9555 Plainfield Rd, \nBlue Ash, \nOH 45236, \nUnited States"
                     android:textSize="18sp"

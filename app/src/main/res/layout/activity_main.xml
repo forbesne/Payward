@@ -57,7 +57,7 @@
             android:minHeight="10dp"
             android:text=""
             android:hint="@string/miles"
-            android:inputType="text"
+            android:inputType="number"
             android:autofillHints=""
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
