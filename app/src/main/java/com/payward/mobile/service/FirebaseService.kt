@@ -188,6 +188,7 @@ class FirebaseService {
                 if (documentTo.exists()) {
                     val toUser = documentTo.toObject(User::class.java)
                     if (toUser != null) {
+                        toUser.helped = toUser.helped + 1
                         toUser.helpingPoints = toUser.helpingPoints + points
                         toUidRef.set(toUser)
                     }
