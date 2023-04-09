@@ -41,4 +41,7 @@
         <item name="cornerSize">4dp</item>
     </style>
 
+    <style name="AppTheme.Overlay" parent="ThemeOverlay.Material3.DynamicColors.DayNight">
+        <item name="iconColor">@android:color/system_accent2_600</item>
+    </style>
 </resources>

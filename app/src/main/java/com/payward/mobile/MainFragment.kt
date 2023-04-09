@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.material.color.DynamicColors
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -24,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 
         override fun onCreate(savedInstanceState: Bundle?) {
+            DynamicColors.applyToActivitiesIfAvailable(application)
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_main_fragment)
 

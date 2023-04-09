@@ -12,9 +12,9 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.color.DynamicColors
 import com.google.firebase.auth.FirebaseAuth
 import com.payward.mobile.dto.User
-
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -22,6 +22,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var logoutBtn: Button
     private lateinit var currentUser: User
     override fun onCreate(savedInstanceState: Bundle?) {
+        DynamicColors.applyToActivitiesIfAvailable(application)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 

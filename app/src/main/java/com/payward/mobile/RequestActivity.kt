@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.color.DynamicColors
 import com.payward.mobile.dto.LocationDetails
 import com.payward.mobile.dto.Request
 
@@ -17,6 +18,7 @@ class RequestActivity : AppCompatActivity() {
     private lateinit var locationDetails: LocationDetails
     lateinit var categorySelected: String
     override fun onCreate(savedInstanceState: Bundle?) {
+        DynamicColors.applyToActivitiesIfAvailable(application)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_request)
 

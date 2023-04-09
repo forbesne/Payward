@@ -5,4 +5,5 @@
     <attr name="colorContainer" format="color" />
     <attr name="colorOnContainer" format="color" />
     <attr name="harmonize" format="boolean" />
+    <attr name="iconColor" format="color" />
 </resources>

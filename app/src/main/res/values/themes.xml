@@ -2,7 +2,6 @@
 <resources>
 
     <style name="Theme.Payward" parent="Theme.Material3.Light">
-        <item name="android:statusBarColor">@color/dark_green</item>
 
         <item name="colorPrimary">@color/md_theme_light_primary</item>
         <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
