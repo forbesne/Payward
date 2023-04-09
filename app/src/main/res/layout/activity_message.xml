@@ -5,13 +5,48 @@
     android:layout_height="match_parent"
     android:background="#F5F6F8">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All"
+            />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Requests"
+            />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabOther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other's Requests"
+            />
+
+    </com.google.android.material.tabs.TabLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="640dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:id="@+id/list_view"/>
 
     <include
         layout="@layout/menu"
         android:padding="30dp"/>
 
+    </LinearLayout>
 </RelativeLayout>

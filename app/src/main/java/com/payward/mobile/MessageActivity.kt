@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -13,17 +15,20 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.DynamicColors
+import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.payward.mobile.dto.User
 import com.payward.mobile.dto.UserRoom
+import kotlin.properties.Delegates
 
 class MessageActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
     private var userRoomsList = ArrayList<UserRoom>()
+    private var userRoomsFilteredList = ArrayList<UserRoom>()
     private lateinit var auth: FirebaseAuth
-
+    var tabSelected by Delegates.notNull<Int>()
     override fun onCreate(savedInstanceState: Bundle?) {
         DynamicColors.applyToActivitiesIfAvailable(application)
         super.onCreate(savedInstanceState)
@@ -73,19 +78,41 @@ class MessageActivity : AppCompatActivity() {
         rvUserRooms.hasFixedSize()
         rvUserRooms.layoutManager = LinearLayoutManager(applicationContext)
         rvUserRooms.itemAnimator = DefaultItemAnimator()
-        rvUserRooms.adapter = UserRoomsAdapter(userRoomsList, R.layout.item_message)
+        rvUserRooms.adapter = UserRoomsAdapter(userRoomsFilteredList, R.layout.item_message)
 
         viewModel.userRooms.observeForever {
                 userRooms ->
             userRoomsList.removeAll(userRoomsList)
             userRoomsList.addAll(userRooms)
+            userRoomsFilteredList.removeAll(userRoomsFilteredList)
+            userRoomsFilteredList.addAll(userRooms)
             rvUserRooms.adapter!!.notifyDataSetChanged()
         }
+
+        val tabLayout = findViewById<TabLayout>(R.id.tabLayout)
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if (tab != null) {
+                    tabSelected = tab.position
+                    (rvUserRooms.adapter as MessageActivity.UserRoomsAdapter).getFilter().filter("10")
+                }
+                // Handle tab select
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                // Handle tab reselect
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                // Handle tab unselect
+            }
+        })
 
         title = "Messages"
     }
 
-    inner class UserRoomsAdapter(val userRooms: ArrayList<UserRoom>, val item: Int) : RecyclerView.Adapter<MessageActivity.UserRoomViewHolder>() {
+    inner class UserRoomsAdapter(val userRooms: ArrayList<UserRoom>, val item: Int) : RecyclerView.Adapter<MessageActivity.UserRoomViewHolder>(), Filterable {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserRoomViewHolder {
             val view = LayoutInflater.from(parent.context).inflate(item, parent, false)
@@ -104,18 +131,56 @@ class MessageActivity : AppCompatActivity() {
             return userRooms.size
         }
 
+        override fun getFilter(): Filter {
+            return userRoomFilter
+        }
+
+        private val userRoomFilter: Filter = object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults? {
+                var filteredList: MutableList<UserRoom> = java.util.ArrayList()
+                if (tabSelected == 0) {
+                    filteredList = userRoomsList
+                }
+                else {
+                    var user = auth.currentUser
+                    for (userRoom in userRoomsList) {
+                        user?.let {
+                            if ((tabSelected == 1) && (user.uid == userRoom.request.userId)) {
+                                filteredList.add(userRoom)
+                            }
+                            if ((tabSelected == 2) && (user.uid != userRoom.request.userId)) {
+                                filteredList.add(userRoom)
+                            }
+                        }
+
+                    }
+                }
+
+
+                val results = FilterResults()
+                results.values = filteredList
+                return results
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults) {
+                userRoomsFilteredList.clear()
+                userRoomsFilteredList.addAll((results.values as List<UserRoom>))
+                notifyDataSetChanged()
+            }
+        }
     }
 
     inner class UserRoomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
+        private var lblTitle: TextView = itemView.findViewById(R.id.title)
         private var lblUserName: TextView = itemView.findViewById(R.id.txtName)
         private var lblDescription: TextView = itemView.findViewById(R.id.txtRequest)
 
         fun updateUserRoom (userRoom: UserRoom) {
 
+            lblTitle.text = userRoom.user.userName[0].toString()
             lblUserName.text = userRoom.user.userName
             lblDescription.text = userRoom.request.text
-
 
         }
     }

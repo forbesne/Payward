@@ -12,9 +12,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:background="#F5F6F8"
         android:padding="10dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/circle"
+            android:gravity="center"
+            android:text="L"
+        android:textSize="25dp"
+            android:textColor="@color/design_default_color_on_primary"
+        android:textStyle="bold"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="10dp">
 
         <TextView
             android:id="@+id/txtName"
@@ -35,6 +53,7 @@
             android:textAlignment="textStart"
             android:textColor="#515C6F"/>
 
+    </LinearLayout>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
