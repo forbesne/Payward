@@ -131,18 +131,27 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener, OnMap
         /**
          * User's current location
          */
-        appViewModel.getLocationLiveData().observeForever{
-            locationDetails = it
-//            val position = LatLng(locationDetails.latitude.toDouble(), locationDetails.longitude.toDouble())
-            val position = LatLng(39.13447904988019, -84.51552473741883)
-            mMap.addMarker(
-                MarkerOptions()
-                    .position(position)
-                    .title("Your current location")
-                    .icon(getBitmapDescriptor(R.drawable.baseline_man_4_24))
-            )?.tag = "person"
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 12f))
-        }
+//        appViewModel.getLocationLiveData().observeForever{
+//            locationDetails = it
+////            val position = LatLng(locationDetails.latitude.toDouble(), locationDetails.longitude.toDouble())
+//            val position = LatLng(39.13447904988019, -84.51552473741883)
+//            mMap.addMarker(
+//                MarkerOptions()
+//                    .position(position)
+//                    .title("Your current location")
+//                    .icon(getBitmapDescriptor(R.drawable.baseline_man_4_24))
+//            )?.tag = "person"
+//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 12f))
+//        }
+
+        val position = LatLng(39.13447904988019, -84.51552473741883)
+        mMap.addMarker(
+            MarkerOptions()
+                .position(position)
+                .title("Your current location")
+                .icon(getBitmapDescriptor(R.drawable.baseline_man_4_24))
+        )?.tag = "person"
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 12f))
 
         /**
          * Add markers for each request
@@ -261,7 +270,6 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener, OnMap
         return (resultMiles).toBigDecimal().setScale(1, RoundingMode.UP).toDouble()
     }
     private fun respondRequest(request: Request) {
-        viewModel.respond(request)
         val firebaseUser = FirebaseAuth.getInstance().currentUser
         if (firebaseUser != null) {
             val fromUid = firebaseUser.uid

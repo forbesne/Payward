@@ -29,10 +29,6 @@ class MainViewModel : ViewModel() {
         firebaseService.save(user)
     }
 
-    fun respond(request: Request) {
-        firebaseService.respond(request)
-    }
-
     fun createUser() {
         firebaseService.createUser()
     }

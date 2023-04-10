@@ -10,7 +10,6 @@ import com.payward.mobile.dto.*
 class FirebaseService {
     private var _requests: MutableLiveData<ArrayList<Request>> = MutableLiveData<ArrayList<Request>>()
     private var _request = Request()
-    private var response = Response()
     private var _userRooms: MutableLiveData<ArrayList<UserRoom>> = MutableLiveData<ArrayList<UserRoom>>()
     private var _userRoom = UserRoom()
     private var _user: MutableLiveData<User> = MutableLiveData<User>()
@@ -109,7 +108,6 @@ class FirebaseService {
         user?.let {
             request.userDisplayName = user.displayName.toString()
             request.userId = user.uid
-            request.user = User(user.uid, user.displayName!!)
         }
         val document = if (request.requestId.isEmpty()) {
             //add
@@ -123,22 +121,6 @@ class FirebaseService {
         val handle = document.set(request)
         handle.addOnSuccessListener { Log.d("Firebase", "Document Saved") }
         handle.addOnFailureListener { Log.e("Firebase", "Save failed $it ")}
-    }
-
-    fun respond(request: Request) {
-        val firestore = FirebaseFirestore.getInstance()
-        val collection = firestore.collection("requests").document(request.requestId).collection("responses")
-        val user = auth.currentUser
-        user?.let {
-            response.userId = user.displayName.toString()
-        }
-        val task = collection.add(response)
-        task.addOnSuccessListener {
-            response.responseId = it.id
-        }
-        task.addOnFailureListener {
-            Log.d("Firebase", "Save Failed")
-        }
     }
 
     fun acceptHelp(request: Request, toUid: String) {

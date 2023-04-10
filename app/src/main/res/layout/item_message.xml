@@ -18,9 +18,10 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/circle"
+            style="@style/Widget.App.Button.TonalButton.Letter"
             android:gravity="center"
             android:text="L"
         android:textSize="25dp"

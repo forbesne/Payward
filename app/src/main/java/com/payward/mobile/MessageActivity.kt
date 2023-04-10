@@ -156,7 +156,6 @@ class MessageActivity : AppCompatActivity() {
                     }
                 }
 
-
                 val results = FilterResults()
                 results.values = filteredList
                 return results

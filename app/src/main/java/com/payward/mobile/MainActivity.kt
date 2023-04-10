@@ -117,9 +117,7 @@ class MainActivity : AppCompatActivity() {
             (rvRequests.adapter as RequestsAdapter).filter.filter("10")
         }
 
-
-
-//        requestLocationPermissions()
+        requestLocationPermissions()
     }
 
     private fun requestLocationPermissions() {
@@ -269,7 +267,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun respondRequest(request: Request) {
-       viewModel.respond(request)
         val firebaseUser = FirebaseAuth.getInstance().currentUser
         if (firebaseUser != null) {
             val fromUid = firebaseUser.uid

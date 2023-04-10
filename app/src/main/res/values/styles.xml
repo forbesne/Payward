@@ -29,6 +29,14 @@
         <item name="iconGravity">textStart</item>
     </style>
 
+    <style name="Widget.App.Button.TonalButton.Letter" parent="Widget.Material3.Button.TonalButton">
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:minWidth">42dp</item>
+        <item name="android:minHeight">42dp</item>
+    </style>
+
     <style name="Widget.App.ExposedDropdownMenu" parent="Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.ExposedDropdownMenu</item>
         <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>
