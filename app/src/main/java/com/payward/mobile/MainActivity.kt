@@ -24,27 +24,20 @@ import com.payward.mobile.dto.User
 import java.math.RoundingMode
 import kotlin.properties.Delegates
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : PaywardActivity() {
 
-    private lateinit var viewModel: MainViewModel
     private var requestList = ArrayList<Request>()
     private var requestListFiltered = ArrayList<Request>()
-    private lateinit var auth: FirebaseAuth
-    private lateinit var appViewModel: AppViewModel
-    private lateinit var locationDetails: LocationDetails
+    override lateinit var locationDetails: LocationDetails
     lateinit var categorySelected: String
-    var milesSelected by Delegates.notNull<Double>()
+    var milesSelected: Double? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         DynamicColors.applyToActivitiesIfAvailable(application)
         super.onCreate(savedInstanceState)
         this.setContentView(R.layout.activity_main)
 
-        milesSelected = 10.0
 
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-
-        auth = FirebaseAuth.getInstance()
 
         if (auth.currentUser == null) {
             val intent = Intent(this, MainFragment::class.java)
@@ -54,43 +47,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Already logged in", Toast.LENGTH_LONG).show()
         }
 
-
-        viewModel.initializeFirebase()
-
-        val btnHome = findViewById<Button>(R.id.homeBtn)
-        btnHome.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        val btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
-        btnHelpRequest.setOnClickListener {
-            val intent = Intent(this, RequestActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        val btnMaps = findViewById<Button>(R.id.mapsBtn)
-        btnMaps.setOnClickListener {
-            val intent = Intent(this, MapsActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        val btnMessages = findViewById<Button>(R.id.messagesBtn)
-        btnMessages.setOnClickListener {
-            val intent = Intent(this, MessageActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        val btnProfile = findViewById<Button>(R.id.btnProfile)
-        btnProfile.setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+        initMenu()
 
         val rvRequests = findViewById<RecyclerView>(R.id.rvRequests)
         rvRequests.hasFixedSize()
@@ -110,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         val btnFilter = findViewById<Button>(R.id.filter_btn)
         val txtCategory = findViewById<AutoCompleteTextView>(R.id.txtCategory)
         btnFilter.setOnClickListener {
+            milesSelected = findViewById<TextView>(R.id.txtDistance).text.toString().toDoubleOrNull()
             categorySelected = txtCategory.text.toString()
             if (categorySelected == "") {
                 categorySelected = "All Categories"
@@ -117,7 +75,7 @@ class MainActivity : AppCompatActivity() {
             (rvRequests.adapter as RequestsAdapter).filter.filter("10")
         }
 
-        requestLocationPermissions()
+//        requestLocationPermissions()
     }
 
     private fun requestLocationPermissions() {
@@ -170,29 +128,33 @@ class MainActivity : AppCompatActivity() {
 
             private val requestFilter: Filter = object : Filter() {
                 override fun performFiltering(constraint: CharSequence?): FilterResults {
-                    val filteredList: MutableList<Request> = java.util.ArrayList()
+                    var filteredList: MutableList<Request> = java.util.ArrayList()
                     val filterMiles = milesSelected
-                    for (request in requestList) {
-                        if (request.rqStatus == "open") {
-                            if (categorySelected == "All Categories") {
-                                if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
-                                    val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.13447904988019, -84.51552473741883)
-                                    if (milesDistance < filterMiles) {
-                                        filteredList.add(request)
-                                    }
-
-                                }
-                            }
+                    if ((filterMiles == null) && (categorySelected == "All Categories")) {
+                        filteredList = requestList
+                    } else if (filterMiles == null) {
+                        for (request in requestList) {
                             if (categorySelected == request.issueType) {
-                                if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
-                                    val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.13447904988019, -84.51552473741883)
-                                    if (milesDistance < filterMiles) {
-                                        filteredList.add(request)
-                                    }
-                                }
+                                filteredList.add(request)
                             }
                         }
+                    } else {
+                        for (request in requestList) {
+                            val locationProvided = (request.latitude.isNotEmpty() && request.longitude.isNotEmpty())
+                            if (((categorySelected == "All Categories") || (categorySelected == request.issueType)) && locationProvided) {
+                                val milesDistance = getDistanceInMiles(
+                                    request.latitude.toDouble(),
+                                    request.longitude.toDouble(),
+                                    locationDetails
+                                )
+                                if (milesDistance <= filterMiles) {
+                                    filteredList.add(request)
+                                }
+                            }
+
+                        }
                     }
+
                     val results = FilterResults()
                     results.values = filteredList
                     return results
@@ -224,8 +186,11 @@ class MainActivity : AppCompatActivity() {
             lblDistance.text = ""
 
             if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
-                val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.29345029085822, -84.45687723750659)
-                lblDistance.text = "$milesDistance miles"
+
+                if (::locationDetails.isInitialized) {
+                    val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(),locationDetails)
+                    lblDistance.text = "$milesDistance miles"
+                }
             }
             else {
                 lblDistance.text = "Location not provided"
@@ -240,30 +205,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-    }
-
-    private fun requestLocationUpdates() {
-        appViewModel = ViewModelProvider(this)[AppViewModel::class.java]
-
-//        appViewModel.startLocationUpdates()
-
-        appViewModel.getLocationLiveData().observeForever{
-            locationDetails = it
-        }
-
-    }
-
-    private fun getDistanceInMiles(
-        firstLatitude: Double, firstLongitude: Double,
-        secondLatitude: Double, secondLongitude: Double
-    ): Double {
-        val resultMeters = FloatArray(1)
-        Location.distanceBetween(
-            firstLatitude, firstLongitude,
-            secondLatitude, secondLongitude, resultMeters
-        )
-        val resultMiles = resultMeters[0] * 0.000621371192
-        return (resultMiles).toBigDecimal().setScale(1, RoundingMode.UP).toDouble()
     }
 
     private fun respondRequest(request: Request) {

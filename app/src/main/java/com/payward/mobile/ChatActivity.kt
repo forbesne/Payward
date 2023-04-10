@@ -24,12 +24,10 @@ import com.payward.mobile.dto.Message
 import com.payward.mobile.dto.Request
 import com.payward.mobile.dto.User
 
-class ChatActivity : AppCompatActivity() {
+class ChatActivity : PaywardActivity() {
     private var rootRef: FirebaseFirestore? = null
     private var fromUid: String? = ""
     private var adapter: MessageAdapter? = null
-    private lateinit var auth: FirebaseAuth
-    private lateinit var viewModel: MainViewModel
     private var requestId: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,11 +35,6 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
         rootRef = FirebaseFirestore.getInstance()
-        auth = FirebaseAuth.getInstance()
-
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-
-        viewModel.initializeFirebase()
 
         val fromUser = intent.extras?.get("fromUser") as User
         fromUid = fromUser.uid
@@ -107,40 +100,7 @@ class ChatActivity : AppCompatActivity() {
             findViewById<EditText>(R.id.etMessage).text.clear()
         }
 
-        val btnHome = findViewById<Button>(R.id.homeBtn)
-        btnHome.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        val btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
-        btnHelpRequest.setOnClickListener {
-            val intent = Intent(this, RequestActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        val btnMaps = findViewById<Button>(R.id.mapsBtn)
-        btnMaps.setOnClickListener {
-            val intent = Intent(this, MapsActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        val btnMessages = findViewById<Button>(R.id.messagesBtn)
-        btnMessages.setOnClickListener {
-            val intent = Intent(this, MessageActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        val btnProfile = findViewById<Button>(R.id.btnProfile)
-        btnProfile.setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+        initMenu()
 
         val query = rootRef!!.collection("messages").document(roomId).collection("roomMessages").orderBy("sentAt", Query.Direction.ASCENDING)
         val options = FirestoreRecyclerOptions.Builder<Message>().setQuery(query, Message::class.java).build()

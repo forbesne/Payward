@@ -22,57 +22,17 @@ import com.payward.mobile.dto.User
 import com.payward.mobile.dto.UserRoom
 import kotlin.properties.Delegates
 
-class MessageActivity : AppCompatActivity() {
+class MessageActivity : PaywardActivity() {
 
-    private lateinit var viewModel: MainViewModel
     private var userRoomsList = ArrayList<UserRoom>()
     private var userRoomsFilteredList = ArrayList<UserRoom>()
-    private lateinit var auth: FirebaseAuth
     var tabSelected by Delegates.notNull<Int>()
     override fun onCreate(savedInstanceState: Bundle?) {
         DynamicColors.applyToActivitiesIfAvailable(application)
         super.onCreate(savedInstanceState)
         this.setContentView(R.layout.activity_message)
 
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-
-        auth = FirebaseAuth.getInstance()
-        viewModel.initializeFirebase()
-
-        val btnHome = findViewById<Button>(R.id.homeBtn)
-        btnHome.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        val btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
-        btnHelpRequest.setOnClickListener {
-            val intent = Intent(this, RequestActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        val btnMaps = findViewById<Button>(R.id.mapsBtn)
-        btnMaps.setOnClickListener {
-            val intent = Intent(this, MapsActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        val btnMessages = findViewById<Button>(R.id.messagesBtn)
-        btnMessages.setOnClickListener {
-            val intent = Intent(this, MessageActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        val btnProfile = findViewById<Button>(R.id.btnProfile)
-        btnProfile.setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+        initMenu()
 
         val rvUserRooms = findViewById<RecyclerView>(R.id.list_view)
         rvUserRooms.hasFixedSize()
@@ -80,8 +40,7 @@ class MessageActivity : AppCompatActivity() {
         rvUserRooms.itemAnimator = DefaultItemAnimator()
         rvUserRooms.adapter = UserRoomsAdapter(userRoomsFilteredList, R.layout.item_message)
 
-        viewModel.userRooms.observeForever {
-                userRooms ->
+        viewModel.userRooms.observeForever { userRooms ->
             userRoomsList.removeAll(userRoomsList.toSet())
             userRoomsList.addAll(userRooms)
             userRoomsFilteredList.removeAll(userRoomsFilteredList.toSet())
@@ -112,7 +71,8 @@ class MessageActivity : AppCompatActivity() {
         title = "Messages"
     }
 
-    inner class UserRoomsAdapter(private val userRooms: ArrayList<UserRoom>, val item: Int) : RecyclerView.Adapter<MessageActivity.UserRoomViewHolder>(), Filterable {
+    inner class UserRoomsAdapter(private val userRooms: ArrayList<UserRoom>, val item: Int) :
+        RecyclerView.Adapter<MessageActivity.UserRoomViewHolder>(), Filterable {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserRoomViewHolder {
             val view = LayoutInflater.from(parent.context).inflate(item, parent, false)
@@ -140,8 +100,7 @@ class MessageActivity : AppCompatActivity() {
                 var filteredList: MutableList<UserRoom> = java.util.ArrayList()
                 if (tabSelected == 0) {
                     filteredList = userRoomsList
-                }
-                else {
+                } else {
                     val user = auth.currentUser
                     for (userRoom in userRoomsList) {
                         user?.let {
@@ -169,13 +128,13 @@ class MessageActivity : AppCompatActivity() {
         }
     }
 
-    inner class UserRoomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class UserRoomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private var lblTitle: TextView = itemView.findViewById(R.id.title)
         private var lblUserName: TextView = itemView.findViewById(R.id.txtName)
         private var lblDescription: TextView = itemView.findViewById(R.id.txtRequest)
 
-        fun updateUserRoom (userRoom: UserRoom) {
+        fun updateUserRoom(userRoom: UserRoom) {
 
             lblTitle.text = userRoom.user.userName[0].toString()
             lblUserName.text = userRoom.user.userName

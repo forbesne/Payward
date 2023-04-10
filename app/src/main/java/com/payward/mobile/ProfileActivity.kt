@@ -35,6 +35,8 @@ class ProfileActivity : AppCompatActivity() {
         val txtAddress = findViewById<TextView>(R.id.txtAddress)
         val txtMobileNumber = findViewById<TextView>(R.id.txtMobileNumber)
 
+        title = "Profile"
+
         viewModel.currentUser.observeForever {
                 user ->
             currentUser = user
