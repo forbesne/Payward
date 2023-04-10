@@ -63,10 +63,6 @@ class MainViewModel : ViewModel() {
         get() { return firebaseService.userRooms}
         set(value) {firebaseService.userRooms = value}
 
-    internal var userRoom:UserRoom
-        get() { return firebaseService.userRoom}
-        set(value) {firebaseService.userRoom = value}
-
     internal var currentUser:MutableLiveData<User>
         get() { return firebaseService.currentUser}
         set(value) {firebaseService.currentUser = value}

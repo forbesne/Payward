@@ -34,40 +34,40 @@ class MessageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         this.setContentView(R.layout.activity_message)
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         auth = FirebaseAuth.getInstance()
         viewModel.initializeFirebase()
 
-        var btnHome = findViewById<Button>(R.id.homeBtn)
+        val btnHome = findViewById<Button>(R.id.homeBtn)
         btnHome.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
+        val btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
         btnHelpRequest.setOnClickListener {
             val intent = Intent(this, RequestActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var btnMaps = findViewById<Button>(R.id.mapsBtn)
+        val btnMaps = findViewById<Button>(R.id.mapsBtn)
         btnMaps.setOnClickListener {
             val intent = Intent(this, MapsActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var btnMessages = findViewById<Button>(R.id.messagesBtn)
+        val btnMessages = findViewById<Button>(R.id.messagesBtn)
         btnMessages.setOnClickListener {
             val intent = Intent(this, MessageActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var btnProfile = findViewById<Button>(R.id.btnProfile)
+        val btnProfile = findViewById<Button>(R.id.btnProfile)
         btnProfile.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
@@ -82,9 +82,9 @@ class MessageActivity : AppCompatActivity() {
 
         viewModel.userRooms.observeForever {
                 userRooms ->
-            userRoomsList.removeAll(userRoomsList)
+            userRoomsList.removeAll(userRoomsList.toSet())
             userRoomsList.addAll(userRooms)
-            userRoomsFilteredList.removeAll(userRoomsFilteredList)
+            userRoomsFilteredList.removeAll(userRoomsFilteredList.toSet())
             userRoomsFilteredList.addAll(userRooms)
             rvUserRooms.adapter!!.notifyDataSetChanged()
         }
@@ -95,7 +95,7 @@ class MessageActivity : AppCompatActivity() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab != null) {
                     tabSelected = tab.position
-                    (rvUserRooms.adapter as MessageActivity.UserRoomsAdapter).getFilter().filter("10")
+                    (rvUserRooms.adapter as MessageActivity.UserRoomsAdapter).filter.filter("10")
                 }
                 // Handle tab select
             }
@@ -112,7 +112,7 @@ class MessageActivity : AppCompatActivity() {
         title = "Messages"
     }
 
-    inner class UserRoomsAdapter(val userRooms: ArrayList<UserRoom>, val item: Int) : RecyclerView.Adapter<MessageActivity.UserRoomViewHolder>(), Filterable {
+    inner class UserRoomsAdapter(private val userRooms: ArrayList<UserRoom>, val item: Int) : RecyclerView.Adapter<MessageActivity.UserRoomViewHolder>(), Filterable {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserRoomViewHolder {
             val view = LayoutInflater.from(parent.context).inflate(item, parent, false)
@@ -120,7 +120,7 @@ class MessageActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: UserRoomViewHolder, position: Int) {
-            val userRoom = userRooms.get(position)
+            val userRoom = userRooms[position]
             holder.updateUserRoom(userRoom)
             holder.itemView.setOnClickListener {
                 openChat(userRoom)
@@ -136,13 +136,13 @@ class MessageActivity : AppCompatActivity() {
         }
 
         private val userRoomFilter: Filter = object : Filter() {
-            override fun performFiltering(constraint: CharSequence?): FilterResults? {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
                 var filteredList: MutableList<UserRoom> = java.util.ArrayList()
                 if (tabSelected == 0) {
                     filteredList = userRoomsList
                 }
                 else {
-                    var user = auth.currentUser
+                    val user = auth.currentUser
                     for (userRoom in userRoomsList) {
                         user?.let {
                             if ((tabSelected == 1) && (user.uid == userRoom.request.userId)) {

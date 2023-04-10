@@ -40,7 +40,7 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener, OnMap
     private lateinit var auth: FirebaseAuth
     private lateinit var appViewModel: AppViewModel
     private lateinit var locationDetails: LocationDetails
-    var firstclick: Boolean = true
+    private var firstClick: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         DynamicColors.applyToActivitiesIfAvailable(application)
@@ -49,10 +49,10 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener, OnMap
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.initializeFirebase()
         auth = FirebaseAuth.getInstance()
-        appViewModel = ViewModelProvider(this).get(AppViewModel::class.java)
+        appViewModel = ViewModelProvider(this)[AppViewModel::class.java]
 
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -65,35 +65,35 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener, OnMap
 
         title = "Locations"
 
-        var btnHome = findViewById<Button>(R.id.homeBtn)
+        val btnHome = findViewById<Button>(R.id.homeBtn)
         btnHome.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
+        val btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
         btnHelpRequest.setOnClickListener {
             val intent = Intent(this, RequestActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var btnMaps = findViewById<Button>(R.id.mapsBtn)
+        val btnMaps = findViewById<Button>(R.id.mapsBtn)
         btnMaps.setOnClickListener {
             val intent = Intent(this, MapsActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var btnMessages = findViewById<Button>(R.id.messagesBtn)
+        val btnMessages = findViewById<Button>(R.id.messagesBtn)
         btnMessages.setOnClickListener {
             val intent = Intent(this, MessageActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var btnProfile = findViewById<Button>(R.id.btnProfile)
+        val btnProfile = findViewById<Button>(R.id.btnProfile)
         btnProfile.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
@@ -164,7 +164,7 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener, OnMap
         mMap.setOnMapClickListener {
             val details = findViewById<LinearLayout>(R.id.details)
             details.isVisible = false
-            if (!firstclick) {
+            if (!firstClick) {
                 previousMarker.setIcon(getBitmapDescriptor(R.drawable.person_pin_normal))
             }
 
@@ -175,9 +175,9 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener, OnMap
 
     override fun onMarkerClick(marker: Marker): Boolean {
 
-        if (firstclick) {
+        if (firstClick) {
             previousMarker = marker
-            firstclick = false
+            firstClick = false
         }
         previousMarker.setIcon(getBitmapDescriptor(R.drawable.person_pin_normal))
 
@@ -189,12 +189,12 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener, OnMap
 
             marker.setIcon(getBitmapDescriptor(R.drawable.person_pin_focus))
 
-            var lblUserName: TextView = findViewById(R.id.username)
-            var lblDescription: TextView = findViewById(R.id.description)
-            var lblPoints: TextView = findViewById(R.id.points)
-            var btnRespond: Button = findViewById(R.id.btnRespond)
-            var lblCategory: TextView = findViewById(R.id.txtCategory)
-            var lblDistance: TextView = findViewById(R.id.distance)
+            val lblUserName: TextView = findViewById(R.id.username)
+            val lblDescription: TextView = findViewById(R.id.description)
+            val lblPoints: TextView = findViewById(R.id.points)
+            val btnRespond: Button = findViewById(R.id.btnRespond)
+            val lblCategory: TextView = findViewById(R.id.txtCategory)
+            val lblDistance: TextView = findViewById(R.id.distance)
 
 
             if (request != null) {
@@ -206,11 +206,11 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener, OnMap
 
                 if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
                     val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.13447904988019, -84.51552473741883)
-                    lblDistance.text = milesDistance.toString() + " miles"
+                    lblDistance.text = "$milesDistance miles"
                 } else {
                     lblDistance.text = "Location not provided"
                 }
-                var user = auth.currentUser
+                val user = auth.currentUser
                 user?.let {
                     btnRespond.isVisible = request.userId != user.uid
                 }
@@ -234,7 +234,7 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener, OnMap
         return false
     }
 
-    private fun getBitmapDescriptor(id: Int): BitmapDescriptor? {
+    private fun getBitmapDescriptor(id: Int): BitmapDescriptor {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val vectorDrawable = getDrawable(id) as VectorDrawable?
             val h = vectorDrawable!!.intrinsicHeight
@@ -248,14 +248,17 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener, OnMap
             BitmapDescriptorFactory.fromResource(id)
         }
     }
-    private fun getDistanceInMiles(firstLatitude: Double, firstLongitude: Double,
-                                   secondLatitude: Double, secondLongitude: Double): Double {
+    private fun getDistanceInMiles(
+        firstLatitude: Double, firstLongitude: Double,
+        secondLatitude: Double, secondLongitude: Double
+    ): Double {
         val resultMeters = FloatArray(1)
-        Location.distanceBetween(firstLatitude, firstLongitude,
-            secondLatitude, secondLongitude, resultMeters)
-        val resultMiles = resultMeters[0]*0.000621371192
-        val distanceMiles = (resultMiles).toBigDecimal().setScale(1, RoundingMode.UP).toDouble()
-        return distanceMiles
+        Location.distanceBetween(
+            firstLatitude, firstLongitude,
+            secondLatitude, secondLongitude, resultMeters
+        )
+        val resultMiles = resultMeters[0] * 0.000621371192
+        return (resultMiles).toBigDecimal().setScale(1, RoundingMode.UP).toDouble()
     }
     private fun respondRequest(request: Request) {
         viewModel.respond(request)
@@ -270,8 +273,8 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener, OnMap
                     if (document.exists()) {
                         val fromUser = document.toObject(User::class.java)
 
-                        val touidRef = rootRef.collection("users").document(request.userId)
-                        touidRef.get().addOnCompleteListener { taskTo ->
+                        val toUidRef = rootRef.collection("users").document(request.userId)
+                        toUidRef.get().addOnCompleteListener { taskTo ->
                             if (taskTo.isSuccessful) {
                                 val documentTo = taskTo.result
                                 if (documentTo.exists()) {

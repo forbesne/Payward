@@ -55,7 +55,7 @@ class ProfileActivity : AppCompatActivity() {
             finish()
         }
 
-        var btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
+        val btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
         btnHelpRequest.setOnClickListener {
             currentUser.address = txtAddress.text.toString()
             currentUser.mobileNumber = txtMobileNumber.text.toString()
@@ -65,7 +65,7 @@ class ProfileActivity : AppCompatActivity() {
             finish()
         }
 
-        var btnMaps = findViewById<Button>(R.id.mapsBtn)
+        val btnMaps = findViewById<Button>(R.id.mapsBtn)
         btnMaps.setOnClickListener {
             currentUser.address = txtAddress.text.toString()
             currentUser.mobileNumber = txtMobileNumber.text.toString()
@@ -75,7 +75,7 @@ class ProfileActivity : AppCompatActivity() {
             finish()
         }
 
-        var btnMessages = findViewById<Button>(R.id.messagesBtn)
+        val btnMessages = findViewById<Button>(R.id.messagesBtn)
         btnMessages.setOnClickListener {
             currentUser.address = txtAddress.text.toString()
             currentUser.mobileNumber = txtMobileNumber.text.toString()
@@ -85,7 +85,7 @@ class ProfileActivity : AppCompatActivity() {
             finish()
         }
 
-        var btnProfile = findViewById<Button>(R.id.btnProfile)
+        val btnProfile = findViewById<Button>(R.id.btnProfile)
         btnProfile.setOnClickListener {
             currentUser.address = txtAddress.text.toString()
             currentUser.mobileNumber = txtMobileNumber.text.toString()

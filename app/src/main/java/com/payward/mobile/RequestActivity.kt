@@ -1,10 +1,11 @@
 package com.payward.mobile
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.*
+import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.color.DynamicColors
 import com.payward.mobile.dto.LocationDetails
@@ -21,9 +22,9 @@ class RequestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_request)
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.initializeFirebase()
-        appViewModel = ViewModelProvider(this).get(AppViewModel::class.java)
+        appViewModel = ViewModelProvider(this)[AppViewModel::class.java]
 
         appViewModel.getLocationLiveData().observeForever {
             locationDetails = it
@@ -31,7 +32,7 @@ class RequestActivity : AppCompatActivity() {
 
         btnSubmit = findViewById(R.id.btnSubmit)
         btnSubmit.setOnClickListener {
-            var request = Request()
+            val request = Request()
             request.issueType = findViewById<AutoCompleteTextView>(R.id.txtCategory).text.toString()
             request.text = findViewById<EditText>(R.id.txtDescription).text.toString()
             request.helpingPoints = findViewById<EditText>(R.id.txtPoints).text.toString().toInt()
@@ -43,35 +44,35 @@ class RequestActivity : AppCompatActivity() {
             finish()
         }
 
-        var btnHome = findViewById<Button>(R.id.homeBtn)
+        val btnHome = findViewById<Button>(R.id.homeBtn)
         btnHome.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
+        val btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
         btnHelpRequest.setOnClickListener {
             val intent = Intent(this, RequestActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var btnMaps = findViewById<Button>(R.id.mapsBtn)
+        val btnMaps = findViewById<Button>(R.id.mapsBtn)
         btnMaps.setOnClickListener {
             val intent = Intent(this, MapsActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var btnMessages = findViewById<Button>(R.id.messagesBtn)
+        val btnMessages = findViewById<Button>(R.id.messagesBtn)
         btnMessages.setOnClickListener {
             val intent = Intent(this, MessageActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var btnProfile = findViewById<Button>(R.id.btnProfile)
+        val btnProfile = findViewById<Button>(R.id.btnProfile)
         btnProfile.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)

@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.DynamicColors
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.payward.mobile.dto.LocationDetails
@@ -43,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         milesSelected = 10.0
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         auth = FirebaseAuth.getInstance()
 
@@ -58,42 +57,42 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.initializeFirebase()
 
-        var btnHome = findViewById<Button>(R.id.homeBtn)
+        val btnHome = findViewById<Button>(R.id.homeBtn)
         btnHome.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
+        val btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
         btnHelpRequest.setOnClickListener {
             val intent = Intent(this, RequestActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var btnMaps = findViewById<Button>(R.id.mapsBtn)
+        val btnMaps = findViewById<Button>(R.id.mapsBtn)
         btnMaps.setOnClickListener {
             val intent = Intent(this, MapsActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var btnMessages = findViewById<Button>(R.id.messagesBtn)
+        val btnMessages = findViewById<Button>(R.id.messagesBtn)
         btnMessages.setOnClickListener {
             val intent = Intent(this, MessageActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var btnProfile = findViewById<Button>(R.id.btnProfile)
+        val btnProfile = findViewById<Button>(R.id.btnProfile)
         btnProfile.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var rvRequests = findViewById<RecyclerView>(R.id.rvRequests)
+        val rvRequests = findViewById<RecyclerView>(R.id.rvRequests)
         rvRequests.hasFixedSize()
         rvRequests.layoutManager = LinearLayoutManager(applicationContext)
         rvRequests.itemAnimator = DefaultItemAnimator()
@@ -101,21 +100,21 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.requests.observeForever {
                 requests ->
-            requestList.removeAll(requestList)
+            requestList.removeAll(requestList.toSet())
             requestList.addAll(requests)
-            requestListFiltered.removeAll(requestListFiltered)
+            requestListFiltered.removeAll(requestListFiltered.toSet())
             requestListFiltered.addAll(requests)
             rvRequests.adapter!!.notifyDataSetChanged()
         }
 
-        var btnFilter = findViewById<Button>(R.id.filter_btn)
-        var txtCategory = findViewById<AutoCompleteTextView>(R.id.txtCategory)
+        val btnFilter = findViewById<Button>(R.id.filter_btn)
+        val txtCategory = findViewById<AutoCompleteTextView>(R.id.txtCategory)
         btnFilter.setOnClickListener {
             categorySelected = txtCategory.text.toString()
             if (categorySelected == "") {
                 categorySelected = "All Categories"
             }
-            (rvRequests.adapter as RequestsAdapter).getFilter().filter("10")
+            (rvRequests.adapter as RequestsAdapter).filter.filter("10")
         }
 
 
@@ -151,7 +150,7 @@ class MainActivity : AppCompatActivity() {
             Manifest.permission.ACCESS_COARSE_LOCATION))
     }
 
-        inner class RequestsAdapter(val requests: ArrayList<Request>, val itemPost: Int) : RecyclerView.Adapter<MainActivity.RequestViewHolder>(), Filterable {
+        inner class RequestsAdapter(private val requests: ArrayList<Request>, private val itemPost: Int) : RecyclerView.Adapter<MainActivity.RequestViewHolder>(), Filterable {
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RequestViewHolder {
                 val view = LayoutInflater.from(parent.context).inflate(itemPost, parent, false)
@@ -159,7 +158,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onBindViewHolder(holder: RequestViewHolder, position: Int) {
-                val request = requests.get(position)
+                val request = requests[position]
                 holder.updateRequest(request)
             }
 
@@ -172,7 +171,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             private val requestFilter: Filter = object : Filter() {
-                override fun performFiltering(constraint: CharSequence?): FilterResults? {
+                override fun performFiltering(constraint: CharSequence?): FilterResults {
                     val filteredList: MutableList<Request> = java.util.ArrayList()
                     val filterMiles = milesSelected
                     for (request in requestList) {
@@ -228,12 +227,12 @@ class MainActivity : AppCompatActivity() {
 
             if (request.latitude.isNotEmpty() && request.longitude.isNotEmpty()) {
                 val milesDistance = getDistanceInMiles(request.latitude.toDouble(), request.longitude.toDouble(), 39.29345029085822, -84.45687723750659)
-                lblDistance.text = milesDistance.toString() + " miles"
+                lblDistance.text = "$milesDistance miles"
             }
             else {
                 lblDistance.text = "Location not provided"
             }
-            var user = auth.currentUser
+            val user = auth.currentUser
             user?.let {
                 btnRespond.isVisible = request.userId != user.uid
             }
@@ -245,8 +244,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    internal fun requestLocationUpdates() {
-        appViewModel = ViewModelProvider(this).get(AppViewModel::class.java)
+    private fun requestLocationUpdates() {
+        appViewModel = ViewModelProvider(this)[AppViewModel::class.java]
 
 //        appViewModel.startLocationUpdates()
 
@@ -256,14 +255,17 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun getDistanceInMiles(firstLatitude: Double, firstLongitude: Double,
-                                   secondLatitude: Double, secondLongitude: Double): Double {
+    private fun getDistanceInMiles(
+        firstLatitude: Double, firstLongitude: Double,
+        secondLatitude: Double, secondLongitude: Double
+    ): Double {
         val resultMeters = FloatArray(1)
-        Location.distanceBetween(firstLatitude, firstLongitude,
-            secondLatitude, secondLongitude, resultMeters)
-        val resultMiles = resultMeters[0]*0.000621371192
-        val distanceMiles = (resultMiles).toBigDecimal().setScale(1, RoundingMode.UP).toDouble()
-        return distanceMiles
+        Location.distanceBetween(
+            firstLatitude, firstLongitude,
+            secondLatitude, secondLongitude, resultMeters
+        )
+        val resultMiles = resultMeters[0] * 0.000621371192
+        return (resultMiles).toBigDecimal().setScale(1, RoundingMode.UP).toDouble()
     }
 
     private fun respondRequest(request: Request) {
@@ -279,8 +281,8 @@ class MainActivity : AppCompatActivity() {
                     if (document.exists()) {
                         val fromUser = document.toObject(User::class.java)
 
-                        val touidRef = rootRef.collection("users").document(request.userId)
-                        touidRef.get().addOnCompleteListener { taskTo ->
+                        val toUidRef = rootRef.collection("users").document(request.userId)
+                        toUidRef.get().addOnCompleteListener { taskTo ->
                             if (taskTo.isSuccessful) {
                                 val documentTo = taskTo.result
                                 if (documentTo.exists()) {

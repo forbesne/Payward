@@ -39,7 +39,7 @@ class ChatActivity : AppCompatActivity() {
         rootRef = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         viewModel.initializeFirebase()
 
@@ -82,13 +82,13 @@ class ChatActivity : AppCompatActivity() {
             val builder = AlertDialog.Builder(this)
             builder.setMessage("Are you sure you want to accept help and close this request?")
                 .setCancelable(false)
-                .setPositiveButton("Yes") { dialog, id ->
+                .setPositiveButton("Yes") { _, _ ->
                     viewModel.acceptHelp(request, toUid)
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
                 }
-                .setNegativeButton("No") { dialog, id ->
+                .setNegativeButton("No") { dialog, _ ->
                     // Dismiss the dialog
                     dialog.dismiss()
                 }
@@ -107,35 +107,35 @@ class ChatActivity : AppCompatActivity() {
             findViewById<EditText>(R.id.etMessage).text.clear()
         }
 
-        var btnHome = findViewById<Button>(R.id.homeBtn)
+        val btnHome = findViewById<Button>(R.id.homeBtn)
         btnHome.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
+        val btnHelpRequest = findViewById<Button>(R.id.helpRequestBtn)
         btnHelpRequest.setOnClickListener {
             val intent = Intent(this, RequestActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var btnMaps = findViewById<Button>(R.id.mapsBtn)
+        val btnMaps = findViewById<Button>(R.id.mapsBtn)
         btnMaps.setOnClickListener {
             val intent = Intent(this, MapsActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var btnMessages = findViewById<Button>(R.id.messagesBtn)
+        val btnMessages = findViewById<Button>(R.id.messagesBtn)
         btnMessages.setOnClickListener {
             val intent = Intent(this, MessageActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        var btnProfile = findViewById<Button>(R.id.btnProfile)
+        val btnProfile = findViewById<Button>(R.id.btnProfile)
         btnProfile.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
@@ -145,8 +145,8 @@ class ChatActivity : AppCompatActivity() {
         val query = rootRef!!.collection("messages").document(roomId).collection("roomMessages").orderBy("sentAt", Query.Direction.ASCENDING)
         val options = FirestoreRecyclerOptions.Builder<Message>().setQuery(query, Message::class.java).build()
         adapter = MessageAdapter(options)
-        val recycler_view = findViewById<RecyclerView>(R.id.recyclerView)
-        recycler_view.adapter = adapter
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.adapter = adapter
 
         title = toUser.userName
     }
@@ -182,8 +182,8 @@ class ChatActivity : AppCompatActivity() {
         }
 
         override fun onDataChanged() {
-            val recycler_view = findViewById<RecyclerView>(R.id.recyclerView)
-            recycler_view.layoutManager?.scrollToPosition(itemCount - 1)
+            val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+            recyclerView.layoutManager?.scrollToPosition(itemCount - 1)
         }
     }
 
