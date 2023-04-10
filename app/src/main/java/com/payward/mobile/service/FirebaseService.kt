@@ -8,12 +8,12 @@ import com.google.firebase.firestore.SetOptions
 import com.payward.mobile.dto.*
 
 class FirebaseService {
-    var _requests: MutableLiveData<ArrayList<Request>> = MutableLiveData<ArrayList<Request>>()
-    var _request = Request()
-    var response = Response()
-    var _userRooms: MutableLiveData<ArrayList<UserRoom>> = MutableLiveData<ArrayList<UserRoom>>()
-    var _userRoom = UserRoom()
-    var _user: MutableLiveData<User> = MutableLiveData<User>()
+    private var _requests: MutableLiveData<ArrayList<Request>> = MutableLiveData<ArrayList<Request>>()
+    private var _request = Request()
+    private var response = Response()
+    private var _userRooms: MutableLiveData<ArrayList<UserRoom>> = MutableLiveData<ArrayList<UserRoom>>()
+    private var _userRoom = UserRoom()
+    private var _user: MutableLiveData<User> = MutableLiveData<User>()
 
     private lateinit var auth: FirebaseAuth
 
@@ -41,8 +41,7 @@ class FirebaseService {
                 }
                 snapshot?.let {
                     var currentUser = User()
-                    val document = snapshot
-                    val user = document.toObject(User::class.java)
+                    val user = snapshot.toObject(User::class.java)
                     user?.let {
                         currentUser = user
                     }
@@ -110,7 +109,7 @@ class FirebaseService {
         user?.let {
             request.userDisplayName = user.displayName.toString()
             request.userId = user.uid
-            request.user = user.uid.let { User(it, user.displayName!!) }
+            request.user = User(user.uid, user.displayName!!)
         }
         val document = if (request.requestId.isEmpty()) {
             //add
@@ -124,19 +123,6 @@ class FirebaseService {
         val handle = document.set(request)
         handle.addOnSuccessListener { Log.d("Firebase", "Document Saved") }
         handle.addOnFailureListener { Log.e("Firebase", "Save failed $it ")}
-    }
-
-    internal fun save(response: Response) {
-        val firestore = FirebaseFirestore.getInstance()
-        val collection = firestore.collection("requests").document(request.requestId).collection("responses")
-        val task = collection.add(response)
-        task.addOnSuccessListener {
-            response.responseId = it.id
-        }
-        task.addOnFailureListener {
-            Log.d("Firebase", "Save Failed")
-        }
-
     }
 
     fun respond(request: Request) {
@@ -161,7 +147,7 @@ class FirebaseService {
         transferPoints(toUid, request.helpingPoints)
 
     }
-    fun transferPoints(toUid: String, points: Int) {
+    private fun transferPoints(toUid: String, points: Int) {
         val firebaseUser = auth.currentUser
         val firestore = FirebaseFirestore.getInstance()
         if (firebaseUser != null) {
