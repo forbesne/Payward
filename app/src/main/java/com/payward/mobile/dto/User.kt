@@ -2,7 +2,7 @@ package com.payward.mobile.dto
 
 import java.io.Serializable
 
-class User (
+class User(
     val uid: String = "",
     var userName: String = "",
     var helpingPoints: Int = 0,
